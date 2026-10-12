@@ -1,8 +1,12 @@
 import copy
 import json
+import os
 import pathlib
 
 import pytest
+
+os.environ.setdefault("WATTS_DB", str(pathlib.Path(__file__).resolve().parent / "_test_users.db"))
+os.environ.setdefault("WATTS_SECRET", "test-secret")
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 SAMPLE = ROOT.parent / "Problem Statement" / "sample_input.json"

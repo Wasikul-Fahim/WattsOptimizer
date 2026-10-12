@@ -1,0 +1,219 @@
+WattsOptimizer — "Who Stays On?"
+Slide points for the HackApex presentation
+==========================================================================
+
+
+SLIDE 1 — Title
+---------------
+- WattsOptimizer: "Who Stays On?"
+- Fair, rule-safe generator rosters for markets during load shedding
+- Team name / members
+- One line: "We decide, hour by hour, which shops get generator power, with no rule broken
+  and the most value served across the whole day."
+
+
+SLIDE 2 — The Problem (the story)
+---------------------------------
+- Shapla Shopping Complex, Mirpur. DESCO load shedding: 12–4 PM and 5–8 PM, so 7 hours
+  without grid power
+- One 20 kW generator, but the shops together want nearly 40 kW. Turn them all on and it trips.
+- Only 17 litres of diesel, and the tanker doesn't come before Saturday
+- The pharmacy (insulin fridge) and the ATM booth must be on every hour
+- 10 other shops all want power, and each one's busy hours are different
+  (photocopy in the morning, mobile shop and restaurant in the evening, salon 1–4 PM...)
+- Last year it was done with a pencil: the diesel ran out at 6:30 PM and the first floor went
+  dark in the evening rush
+
+
+SLIDE 3 — Why This Is Hard
+--------------------------
+- Fuel is charged on the COMBINED load per hour (a table lookup, rounded up to the next level),
+  not per shop. Adding one small shop can move the whole hour up a fuel level.
+- No normal shop may be dark more than 2 outage hours in a row (grid hours reset the count)
+- Capacity limit in every hour, and a hard diesel budget for the whole day
+- Litres must be exact to the hundredth, with no rounding tolerance
+- The obvious approach (power the most valuable shops each hour) FAILS:
+  it burns the diesel at noon and leaves the evening dark
+
+
+SLIDE 4 — Constraints at a Glance (the rules)
+---------------------------------------------
+- Capacity: powered kW ≤ generator capacity, every outage hour
+- Fuel: sum of per-hour fuel ≤ budget, with fuel looked up once per hour on the combined load
+- Mandatory: mandatory shops are on in every outage hour
+- Dark runs: no normal shop dark > max_consecutive_dark hours in a row
+- Objective: maximize the total value served
+- If the rules can't all hold: say "infeasible" and name the rule, shops and hours
+- Bad input: "invalid_input" naming the exact field (HTTP 400)
+
+
+SLIDE 5 — Our Solution
+----------------------
+- A web app plus a public API: POST /api/roster (input JSON in, roster JSON out)
+- It plans the WHOLE DAY AT ONCE instead of hour by hour
+- It returns, for each outage hour, the powered and dark shops, the load, the fuel and the
+  running total
+- Every dark shop gets a truthful one-line reason, with real numbers
+- It runs fully offline with one start command: python app.py (port 8000)
+
+
+SLIDE 6 — How It Works: the Optimizer
+-------------------------------------
+- Google OR-Tools CP-SAT: an exact integer optimization model
+- One yes/no decision per shop per outage hour (at most 12 × 10 = 120 decisions)
+- Each rule maps 1:1 to a constraint, so it is easy to explain:
+    * Capacity:   Σ kw · on ≤ capacity          (each hour)
+    * Fuel:       pick exactly one fuel level per hour; total litres ≤ budget
+    * Mandatory:  on = 1
+    * Dark runs:  every window of (D+1) hours with no grid hour must have ≥ 1 "on"
+    * Objective:  maximize value; ties go to the roster that burns less diesel
+- PROVEN optimal in about 0.1 seconds for twelve shops (limit is 10 s)
+- Fuel is held in integer centilitres, so 8.00 vs 8.00 L never falls to floating-point noise
+- Safety net: if OR-Tools is missing or times out (5 s), a greedy fallback runs and is
+  clearly labelled "best-effort, not proven optimal"
+
+
+SLIDE 7 — Explainable Decisions (every ✗ has a reason)
+-----------------------------------------------------
+- Key insight: in an optimal roster, a dark shop with value is ALWAYS blocked by capacity or
+  fuel. Otherwise switching it on would be allowed and better.
+- Reason types:
+    * "needs 25 kW, generator carries 20 kW"
+    * "worth 0 at 14:00; left off to save diesel"
+    * "capacity: 18 kW on + 4 kW = 22 kW > 20 kW"
+    * "fuel: +4 kW lifts 12:00 from 14 kW to 18 kW (+0.80 L); day total would be
+       17.20 L > 17.00 L — diesel kept for mobile_shop at 18:00 (value 8),
+       restaurant at 19:00 (value 8)"
+- Reasons are worked out from the final roster after solving, so they are always true
+- Infeasible inputs are diagnosed: which rule, which shops, which hours, plus a labelled
+  best-effort roster
+
+
+SLIDE 8 — Results
+-----------------
+- Brief's worked example: value 84, fuel 8.00 L of 8.00 L (matches the official answer)
+- Twelve-shop sample: value 186, fuel 16.40 L of 17.00 L, every rule satisfied
+- Minute-150 update (DESCO extends the outage): re-run and recompute in under a second
+- Proven optimal, not just "good enough"
+
+
+SLIDE 9 — Bug We Found and Fixed (evidence)
+-------------------------------------------
+- Version 1 was a greedy, hour-by-hour solver
+- On the twelve-shop sample it burned 2.80 L in each of the first 6 outage hours
+  (16.80 L), so only 0.20 L was left at 19:00
+- Result: at 19:00 even the pharmacy and ATM were dark.
+  Our checker found 7 violations: 2 mandatory-shop breaks and 5 dark-run breaks
+- Fix: one whole-day CP-SAT model. Same input: 186 value (vs 183), 16.40 L,
+  zero violations
+- This shows the brief's warning in practice: you must plan the day as a whole
+
+
+SLIDE 10 — Boundary Case (evidence)
+-----------------------------------
+- Load exactly equals capacity (10 kW of 10 kW) and fuel exactly equals budget (8.00 L of 8.00 L)
+- Both rules say "≤", so this roster must be ACCEPTED
+- Integer centilitre arithmetic keeps it exact
+- Other side of the edge (tested): budget 7.99 L makes the solver drop below 84 rather than
+  overspend by 0.01 L
+
+
+SLIDE 11 — The App (demo)
+-------------------------
+- Roster board: one row per shop, one column per hour 10:00–19:00, ✓ / ✗ / "grid",
+  mandatory shops marked
+- Per hour: combined load vs capacity, and fuel used vs the running total and budget
+- Click any ✗ to see its reason
+- Pages: Dashboard, Roster, Fuel, Reasons, Insights, Shops, Upload, Report, API Console, Users
+- Upload or paste input JSON; download output JSON
+- Print view: board, loads and fuel on one A4 page for the generator-room door
+- What-if scenarios: change inputs and see the new roster instantly
+- Built with React + TypeScript + Tailwind + Recharts and served by the same Python process.
+  Works offline.
+
+
+SLIDE 12 — Users and Roles
+--------------------------
+- Admin (judges, team): everything, plus managing users
+- Secretary (Rokeya Apa): upload, compute, set today's roster, download, print
+- Committee (other markets): view today's roster, run read-only what-if scenarios
+- No account: other markets' tools call POST /api/roster directly
+  (Uttara and Chattogram committees asked for this)
+
+
+SLIDE 13 — Architecture
+-----------------------
+- Request flow:
+    1. schema.py       strict validation (400 naming the bad field)
+    2. solver.py       CP-SAT whole-day model (greedy fallback)
+    3. reasons.py      a truthful reason for every dark cell
+    4. diagnose.py     names the conflict if infeasible
+    5. output.py       totals recomputed from the roster, never trusted from the solver
+- Stack: Python, FastAPI + uvicorn, OR-Tools, SQLite (logins only), React frontend
+- validate_output.py: an independent rule checker that can verify any output file
+- Decision logic is in ONE file: whostayson/solver.py (found in under 2 minutes)
+
+
+SLIDE 14 — Quality and Security
+-------------------------------
+- 153 automated tests, all passing: schema, solver vs brute force, reasons truthfulness,
+  diagnosis, API, auth, security
+- Solver checked against brute force on small inputs, so we know it is truly optimal
+- Security: strict validation, 64 KB body cap, Content-Security-Policy, no inline scripts,
+  parameterised SQL, PBKDF2 password hashes, signed HttpOnly SameSite cookies,
+  login throttling, no outbound network calls
+- Offline install from vendored wheels, no internet needed at runtime
+
+
+SLIDE 15 — Impact and What's Next
+---------------------------------
+- Impact: no more evening blackouts from running out of diesel, fair treatment of every shop
+  (no shop dark 3 hours in a row), transparent reasons that end arguments
+- Reusable by any market: Mirpur, Uttara, Chattogram... through the open API
+- Next steps:
+    * Pull the DESCO schedule automatically
+    * SMS / WhatsApp alerts to shop owners about their dark hours
+    * Multiple generators and partial loads
+    * Fairness weighting (spread dark hours more evenly)
+    * Multi-day planning around tanker deliveries
+
+
+SLIDE 16 — Thank You / Q&A
+--------------------------
+- "Rokeya Apa says thank you. Monir bhai says don't trip his generator." We don't.
+- Live demo link: http://127.0.0.1:8000
+- Questions?
+
+
+--------------------------------------------------------------------------
+LIKELY JUDGE QUESTIONS (have answers ready, since anyone may be asked)
+--------------------------------------------------------------------------
+Q: Why not greedy?
+A: It can't see the evening. Our evidence shows it ran dry by 19:00 and broke 7 rules.
+
+Q: How do you know it's optimal?
+A: CP-SAT proves optimality, and our tests compare it against brute force on small inputs.
+
+Q: How is fuel modelled?
+A: One level indicator per hour (plus a free "0 kW" level). Exactly one is chosen, the load
+   must fit inside that level's range, and the sum of litres must be ≤ the budget. All values
+   are in centilitres.
+
+Q: How are dark runs enforced?
+A: Every window of D+1 consecutive outage hours (no grid hour inside) must contain at least
+   one "on" hour.
+
+Q: What if no valid roster exists?
+A: status "infeasible". diagnose.py checks mandatory load vs capacity, then mandatory fuel vs
+   budget, then relaxes the dark-run rule to name the conflicting shops and hours. It also
+   attaches a labelled best-effort roster.
+
+Q: Are the reasons ever wrong?
+A: They are derived from the final roster and tested for truthfulness. If no simple reason
+   applies, we re-solve with that cell forced on and report the real value trade-off.
+
+Q: What if OR-Tools fails?
+A: The greedy fallback runs, is labelled "solver": "greedy", and is never presented as optimal.
+
+Q: Ties between equal-value rosters?
+A: The tie-break prefers less diesel, so the result is deterministic.

@@ -39,9 +39,18 @@ def test_hostile_id_is_returned_as_plain_data(sample):
 
 
 def test_no_database_and_no_outbound_http_in_app_code():
-    banned = ("sqlite3", "sqlalchemy", "psycopg", "pymysql", "requests", "urllib.request",
+    banned = ("sqlalchemy", "psycopg", "pymysql", "requests", "urllib.request",
               "httpx", "aiohttp", "socket")
     for f in [SRC / "app.py", *(SRC / "whostayson").glob("*.py")]:
         text = f.read_text()
         for mod in banned:
             assert f"import {mod}" not in text and f"from {mod}" not in text, (f, mod)
+        if f.name != "auth.py":                       # SQL lives in auth.py only, parameterised
+            assert "sqlite3" not in text, f
+
+
+def test_sql_only_parameterised():
+    import re
+    text = (SRC / "whostayson" / "auth.py").read_text()
+    for stmt in re.findall(r'con\.execute\(([^\n]*)', text):
+        assert "f\"" not in stmt and "%" not in stmt and "+ " not in stmt, stmt

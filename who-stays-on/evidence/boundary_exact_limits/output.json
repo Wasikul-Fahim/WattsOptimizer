@@ -1,0 +1,179 @@
+{
+    "status": "ok",
+    "total_value": 84,
+    "total_fuel_litres": 8.0,
+    "fuel_budget_litres": 8.0,
+    "roster": [
+        {
+            "hour": 2,
+            "time": "12:00",
+            "powered": [
+                "pharmacy",
+                "photocopy",
+                "tea_stall"
+            ],
+            "dark": [
+                {
+                    "id": "tailor",
+                    "reason": "fuel: +4 kW lifts 12:00 from 6 kW to 10 kW (+0.40 L); day total would be 8.40 L > 8.00 L budget \u2014 diesel kept for mobile at 18:00 (value 8), photocopy at 13:00 (value 5)"
+                },
+                {
+                    "id": "mobile",
+                    "reason": "fuel: +3 kW lifts 12:00 from 6 kW to 9 kW (+0.40 L); day total would be 8.40 L > 8.00 L budget \u2014 diesel kept for mobile at 18:00 (value 8), photocopy at 13:00 (value 5)"
+                }
+            ],
+            "load_kw": 6,
+            "fuel_litres": 1.2,
+            "value": 12
+        },
+        {
+            "hour": 3,
+            "time": "13:00",
+            "powered": [
+                "pharmacy",
+                "tailor",
+                "photocopy",
+                "tea_stall"
+            ],
+            "dark": [
+                {
+                    "id": "mobile",
+                    "reason": "capacity: 10 kW on + 3 kW = 13 kW > 10 kW (rule 3)"
+                }
+            ],
+            "load_kw": 10,
+            "fuel_litres": 1.6,
+            "value": 16
+        },
+        {
+            "hour": 4,
+            "time": "14:00",
+            "powered": [
+                "pharmacy",
+                "mobile",
+                "tea_stall"
+            ],
+            "dark": [
+                {
+                    "id": "tailor",
+                    "reason": "capacity: 7 kW on + 4 kW = 11 kW > 10 kW (rule 3)"
+                },
+                {
+                    "id": "photocopy",
+                    "reason": "fuel: +2 kW lifts 14:00 from 7 kW to 9 kW (+0.40 L); day total would be 8.40 L > 8.00 L budget \u2014 diesel kept for mobile at 18:00 (value 8), photocopy at 12:00 (value 5)"
+                }
+            ],
+            "load_kw": 7,
+            "fuel_litres": 1.2,
+            "value": 10
+        },
+        {
+            "hour": 7,
+            "time": "17:00",
+            "powered": [
+                "pharmacy",
+                "tailor",
+                "photocopy",
+                "tea_stall"
+            ],
+            "dark": [
+                {
+                    "id": "mobile",
+                    "reason": "capacity: 10 kW on + 3 kW = 13 kW > 10 kW (rule 3)"
+                }
+            ],
+            "load_kw": 10,
+            "fuel_litres": 1.6,
+            "value": 14
+        },
+        {
+            "hour": 8,
+            "time": "18:00",
+            "powered": [
+                "pharmacy",
+                "mobile",
+                "tea_stall"
+            ],
+            "dark": [
+                {
+                    "id": "tailor",
+                    "reason": "capacity: 7 kW on + 4 kW = 11 kW > 10 kW (rule 3)"
+                },
+                {
+                    "id": "photocopy",
+                    "reason": "fuel: +2 kW lifts 18:00 from 7 kW to 9 kW (+0.40 L); day total would be 8.40 L > 8.00 L budget \u2014 diesel kept for mobile at 19:00 (value 8), photocopy at 12:00 (value 5)"
+                }
+            ],
+            "load_kw": 7,
+            "fuel_litres": 1.2,
+            "value": 16
+        },
+        {
+            "hour": 9,
+            "time": "19:00",
+            "powered": [
+                "pharmacy",
+                "mobile",
+                "tea_stall"
+            ],
+            "dark": [
+                {
+                    "id": "tailor",
+                    "reason": "capacity: 7 kW on + 4 kW = 11 kW > 10 kW (rule 3)"
+                },
+                {
+                    "id": "photocopy",
+                    "reason": "fuel: +2 kW lifts 19:00 from 7 kW to 9 kW (+0.40 L); day total would be 8.40 L > 8.00 L budget \u2014 diesel kept for mobile at 18:00 (value 8), photocopy at 12:00 (value 5)"
+                }
+            ],
+            "load_kw": 7,
+            "fuel_litres": 1.2,
+            "value": 16
+        }
+    ],
+    "shops": [
+        {
+            "id": "pharmacy",
+            "kw": 3,
+            "type": "mandatory",
+            "dark_hours": 0
+        },
+        {
+            "id": "tailor",
+            "kw": 4,
+            "type": "normal",
+            "dark_hours": 4
+        },
+        {
+            "id": "mobile",
+            "kw": 3,
+            "type": "normal",
+            "dark_hours": 3
+        },
+        {
+            "id": "photocopy",
+            "kw": 2,
+            "type": "normal",
+            "dark_hours": 3
+        },
+        {
+            "id": "tea_stall",
+            "kw": 1,
+            "type": "normal",
+            "dark_hours": 0
+        }
+    ],
+    "grid_available": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        true,
+        true,
+        false,
+        false,
+        false
+    ],
+    "solver": "cp-sat"
+}

@@ -1,0 +1,255 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------------------------
+   WattsOptimizer tokens. Neutrals switch with the theme; brand accents stay fixed.
+   "*-ink" variants are the readable text versions of each accent on the current surface.
+--------------------------------------------------------------------------------------------- */
+:root {
+  --background: #edf3fc;
+  --surface: #ffffff;
+  --card: #ffffff;
+  --foreground: #222529;
+  --muted-foreground: #5d6878;
+  --border: #d9e2f0;
+  --sunken: #f4f7fc;
+  --ring: #00a8ff;
+
+  --grid-cell: #e6ebf3;
+  --grid-ink: #6b7686;
+
+  --teal-ink: #00987f;
+  --blue-ink: #0077c2;
+  --success-ink: #119e4c;
+  --warning-ink: #a96a00;
+  --danger-ink: #d8264a;
+
+  --on-cell-bg: rgb(57 255 136 / 0.14);
+  --on-cell-border: rgb(17 158 76 / 0.35);
+  --on-glow: 0 0 0 rgb(0 0 0 / 0);
+  --off-cell-bg: rgb(255 77 109 / 0.08);
+  --off-cell-border: rgb(255 77 109 / 0.28);
+
+  --shadow-card: 0 1px 2px rgb(34 37 41 / 0.04), 0 8px 24px -12px rgb(34 60 100 / 0.18);
+  --chart-grid: #e3e9f3;
+  color-scheme: light;
+}
+
+.dark {
+  --background: #222529;
+  --surface: #292d32;
+  --card: #30353b;
+  --foreground: #ffffff;
+  --muted-foreground: #a3acb8;
+  --border: rgb(255 255 255 / 0.12);
+  --sunken: #26292e;
+  --ring: #00a8ff;
+
+  --grid-cell: rgb(255 255 255 / 0.05);
+  --grid-ink: #8a939e;
+
+  --teal-ink: #00e5c3;
+  --blue-ink: #4cc3ff;
+  --success-ink: #39ff88;
+  --warning-ink: #ffb020;
+  --danger-ink: #ff6f89;
+
+  --on-cell-bg: rgb(57 255 136 / 0.12);
+  --on-cell-border: rgb(57 255 136 / 0.45);
+  --on-glow: 0 0 14px -2px rgb(57 255 136 / 0.45);
+  --off-cell-bg: rgb(255 77 109 / 0.1);
+  --off-cell-border: rgb(255 77 109 / 0.3);
+
+  --shadow-card: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 12px 32px -16px rgb(0 0 0 / 0.6);
+  --chart-grid: rgb(255 255 255 / 0.07);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-sunken: var(--sunken);
+  --color-ring: var(--ring);
+  --color-grid-cell: var(--grid-cell);
+  --color-grid-ink: var(--grid-ink);
+
+  --color-teal: #00e5c3;
+  --color-blue: #00a8ff;
+  --color-success: #39ff88;
+  --color-warning: #ffb020;
+  --color-danger: #ff4d6d;
+  --color-teal-ink: var(--teal-ink);
+  --color-blue-ink: var(--blue-ink);
+  --color-success-ink: var(--success-ink);
+  --color-warning-ink: var(--warning-ink);
+  --color-danger-ink: var(--danger-ink);
+
+  --font-display: "Orbitron", "Lato", system-ui, sans-serif;
+  --font-sans: "Lato", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+
+  --shadow-card: var(--shadow-card);
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+}
+
+@utility bg-brand-gradient {
+  background-image: linear-gradient(120deg, #00e5c3 0%, #00a8ff 100%);
+}
+@utility text-brand-gradient {
+  background-image: linear-gradient(120deg, #00e5c3 0%, #00a8ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility label-caps {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Roster cells */
+.cell-on {
+  background: var(--on-cell-bg);
+  border-color: var(--on-cell-border);
+  color: var(--success-ink);
+  box-shadow: var(--on-glow);
+}
+.cell-off {
+  background: var(--off-cell-bg);
+  border-color: var(--off-cell-border);
+  color: var(--danger-ink);
+}
+.cell-grid {
+  background: var(--grid-cell);
+  border-color: transparent;
+  color: var(--grid-ink);
+}
+
+/* Status dot with optional live pulse */
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: currentColor;
+  box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 18%, transparent);
+}
+.status-dot.live {
+  animation: dot-pulse 2s ease-in-out infinite;
+}
+@keyframes dot-pulse {
+  50% {
+    box-shadow: 0 0 0 7px color-mix(in srgb, currentColor 0%, transparent);
+  }
+}
+
+/* Recharts tweaks: let tokens drive text and grid colors */
+.recharts-cartesian-axis-tick-value {
+  fill: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.recharts-cartesian-grid line {
+  stroke: var(--chart-grid);
+}
+.recharts-reference-line-line {
+  stroke-dasharray: 4 4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---------------- Print: one A4 page for the generator-room door ---------------- */
+@page {
+  size: A4 landscape;
+  margin: 10mm;
+}
+@media print {
+  :root,
+  .dark {
+    --background: #ffffff;
+    --surface: #ffffff;
+    --card: #ffffff;
+    --foreground: #111111;
+    --muted-foreground: #444444;
+    --border: #bbbbbb;
+    --grid-cell: #eeeeee;
+    --grid-ink: #555555;
+    --success-ink: #0b6b33;
+    --danger-ink: #a3112f;
+    --on-cell-bg: #e3f7ea;
+    --on-cell-border: #8fd1a8;
+    --on-glow: none;
+    --off-cell-bg: #fde8ec;
+    --off-cell-border: #f0a3b2;
+    --shadow-card: none;
+    color-scheme: light;
+  }
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+  body {
+    background: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .print-page {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
+}
+.print-only {
+  display: none;
+}

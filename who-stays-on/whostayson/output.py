@@ -30,3 +30,14 @@ def to_json(r: Roster, status: str = "ok") -> dict:
         "grid_available": list(inp.grid),
         "solver": r.solver,
     }
+
+
+def infeasible_json(inp, conflict: dict, best_effort: Roster) -> dict:
+    """Rule 5: name the rule/shops/hours in conflict and attach a labelled best-effort roster."""
+    body = to_json(best_effort, status="infeasible")
+    body["conflict"] = conflict
+    body["best_effort_roster"] = body.pop("roster")
+    body["best_effort_note"] = ("not a valid roster: " + "; ".join(
+        f"rule {rule}: {msg}" for rule, msg in best_effort.violations()))
+    body.pop("solver", None)
+    return body

@@ -18,27 +18,27 @@
             "dark": [
                 {
                     "id": "tailor_jamal",
-                    "reason": ""
+                    "reason": "fuel: +4 kW lifts 12:00 from 14 kW to 18 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
                 },
                 {
                     "id": "mobile_shop",
-                    "reason": ""
+                    "reason": "fuel: +3 kW lifts 12:00 from 14 kW to 17 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
                 },
                 {
                     "id": "grocery_fridge",
-                    "reason": ""
+                    "reason": "fuel: +3 kW lifts 12:00 from 14 kW to 17 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
                 },
                 {
                     "id": "electronics",
-                    "reason": ""
+                    "reason": "fuel: +5 kW lifts 12:00 from 14 kW to 19 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
                 },
                 {
                     "id": "restaurant",
-                    "reason": ""
+                    "reason": "fuel: +6 kW lifts 12:00 from 14 kW to 20 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
                 },
                 {
                     "id": "jewellery",
-                    "reason": ""
+                    "reason": "fuel: +3 kW lifts 12:00 from 14 kW to 17 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
                 }
             ],
             "load_kw": 14,
@@ -51,8 +51,7 @@
             "powered": [
                 "pharmacy",
                 "atm_booth",
-                "photocopy",
-                "tea_stall",
+                "mobile_shop",
                 "grocery_fridge",
                 "restaurant",
                 "jewellery"
@@ -60,28 +59,32 @@
             "dark": [
                 {
                     "id": "tailor_jamal",
-                    "reason": ""
+                    "reason": "capacity: 20 kW on + 4 kW = 24 kW > 20 kW (rule 3)"
                 },
                 {
-                    "id": "mobile_shop",
-                    "reason": ""
+                    "id": "photocopy",
+                    "reason": "capacity: 20 kW on + 2 kW = 22 kW > 20 kW (rule 3)"
+                },
+                {
+                    "id": "tea_stall",
+                    "reason": "capacity: 20 kW on + 1 kW = 21 kW > 20 kW (rule 3)"
                 },
                 {
                     "id": "beauty_salon",
-                    "reason": ""
+                    "reason": "capacity: 20 kW on + 4 kW = 24 kW > 20 kW (rule 3)"
                 },
                 {
                     "id": "electronics",
-                    "reason": ""
+                    "reason": "capacity: 20 kW on + 5 kW = 25 kW > 20 kW (rule 3)"
                 },
                 {
                     "id": "clothing",
-                    "reason": ""
+                    "reason": "capacity: 20 kW on + 2 kW = 22 kW > 20 kW (rule 3)"
                 }
             ],
             "load_kw": 20,
             "fuel_litres": 2.8,
-            "value": 31
+            "value": 25
         },
         {
             "hour": 4,
@@ -90,36 +93,45 @@
                 "pharmacy",
                 "atm_booth",
                 "tailor_jamal",
-                "mobile_shop",
-                "photocopy",
-                "tea_stall",
                 "electronics"
             ],
             "dark": [
                 {
+                    "id": "mobile_shop",
+                    "reason": "fuel: +3 kW lifts 14:00 from 14 kW to 17 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
+                },
+                {
+                    "id": "photocopy",
+                    "reason": "fuel: +2 kW lifts 14:00 from 14 kW to 16 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
+                },
+                {
+                    "id": "tea_stall",
+                    "reason": "fuel: +1 kW lifts 14:00 from 14 kW to 15 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
+                },
+                {
                     "id": "beauty_salon",
-                    "reason": ""
+                    "reason": "fuel: +4 kW lifts 14:00 from 14 kW to 18 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
                 },
                 {
                     "id": "grocery_fridge",
-                    "reason": ""
+                    "reason": "fuel: +3 kW lifts 14:00 from 14 kW to 17 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
                 },
                 {
                     "id": "restaurant",
-                    "reason": ""
+                    "reason": "fuel: +6 kW lifts 14:00 from 14 kW to 20 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
                 },
                 {
                     "id": "jewellery",
-                    "reason": ""
+                    "reason": "fuel: +3 kW lifts 14:00 from 14 kW to 17 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
                 },
                 {
                     "id": "clothing",
-                    "reason": ""
+                    "reason": "fuel: +2 kW lifts 14:00 from 14 kW to 16 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
                 }
             ],
-            "load_kw": 20,
-            "fuel_litres": 2.8,
-            "value": 26
+            "load_kw": 14,
+            "fuel_litres": 2.0,
+            "value": 17
         },
         {
             "hour": 5,
@@ -135,27 +147,27 @@
             "dark": [
                 {
                     "id": "tailor_jamal",
-                    "reason": ""
+                    "reason": "fuel: +4 kW lifts 15:00 from 14 kW to 18 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
                 },
                 {
                     "id": "mobile_shop",
-                    "reason": ""
+                    "reason": "fuel: +3 kW lifts 15:00 from 14 kW to 17 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
                 },
                 {
                     "id": "grocery_fridge",
-                    "reason": ""
+                    "reason": "fuel: +3 kW lifts 15:00 from 14 kW to 17 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
                 },
                 {
                     "id": "electronics",
-                    "reason": ""
+                    "reason": "fuel: +5 kW lifts 15:00 from 14 kW to 19 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
                 },
                 {
                     "id": "restaurant",
-                    "reason": ""
+                    "reason": "fuel: +6 kW lifts 15:00 from 14 kW to 20 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
                 },
                 {
                     "id": "jewellery",
-                    "reason": ""
+                    "reason": "fuel: +3 kW lifts 15:00 from 14 kW to 17 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 19:00 (value 8)"
                 }
             ],
             "load_kw": 14,
@@ -178,19 +190,19 @@
             "dark": [
                 {
                     "id": "tailor_jamal",
-                    "reason": ""
+                    "reason": "capacity: 20 kW on + 4 kW = 24 kW > 20 kW (rule 3)"
                 },
                 {
                     "id": "mobile_shop",
-                    "reason": ""
+                    "reason": "capacity: 20 kW on + 3 kW = 23 kW > 20 kW (rule 3)"
                 },
                 {
                     "id": "electronics",
-                    "reason": ""
+                    "reason": "capacity: 20 kW on + 5 kW = 25 kW > 20 kW (rule 3)"
                 },
                 {
                     "id": "restaurant",
-                    "reason": ""
+                    "reason": "capacity: 20 kW on + 6 kW = 26 kW > 20 kW (rule 3)"
                 }
             ],
             "load_kw": 20,
@@ -204,45 +216,36 @@
                 "pharmacy",
                 "atm_booth",
                 "tailor_jamal",
-                "electronics"
+                "mobile_shop",
+                "tea_stall",
+                "electronics",
+                "clothing"
             ],
             "dark": [
                 {
-                    "id": "mobile_shop",
-                    "reason": ""
-                },
-                {
                     "id": "photocopy",
-                    "reason": ""
-                },
-                {
-                    "id": "tea_stall",
-                    "reason": ""
+                    "reason": "capacity: 20 kW on + 2 kW = 22 kW > 20 kW (rule 3)"
                 },
                 {
                     "id": "beauty_salon",
-                    "reason": ""
+                    "reason": "capacity: 20 kW on + 4 kW = 24 kW > 20 kW (rule 3)"
                 },
                 {
                     "id": "grocery_fridge",
-                    "reason": ""
+                    "reason": "capacity: 20 kW on + 3 kW = 23 kW > 20 kW (rule 3)"
                 },
                 {
                     "id": "restaurant",
-                    "reason": ""
+                    "reason": "capacity: 20 kW on + 6 kW = 26 kW > 20 kW (rule 3)"
                 },
                 {
                     "id": "jewellery",
-                    "reason": ""
-                },
-                {
-                    "id": "clothing",
-                    "reason": ""
+                    "reason": "capacity: 20 kW on + 3 kW = 23 kW > 20 kW (rule 3)"
                 }
             ],
-            "load_kw": 14,
-            "fuel_litres": 2.0,
-            "value": 22
+            "load_kw": 20,
+            "fuel_litres": 2.8,
+            "value": 37
         },
         {
             "hour": 9,
@@ -256,35 +259,35 @@
             "dark": [
                 {
                     "id": "tailor_jamal",
-                    "reason": ""
+                    "reason": "fuel: +4 kW lifts 19:00 from 14 kW to 18 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 13:00 (value 7)"
                 },
                 {
                     "id": "photocopy",
-                    "reason": ""
+                    "reason": "fuel: +2 kW lifts 19:00 from 14 kW to 16 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 13:00 (value 7)"
                 },
                 {
                     "id": "tea_stall",
-                    "reason": ""
+                    "reason": "fuel: +1 kW lifts 19:00 from 14 kW to 15 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 13:00 (value 7)"
                 },
                 {
                     "id": "beauty_salon",
-                    "reason": ""
+                    "reason": "fuel: +4 kW lifts 19:00 from 14 kW to 18 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 13:00 (value 7)"
                 },
                 {
                     "id": "grocery_fridge",
-                    "reason": ""
+                    "reason": "fuel: +3 kW lifts 19:00 from 14 kW to 17 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 13:00 (value 7)"
                 },
                 {
                     "id": "electronics",
-                    "reason": ""
+                    "reason": "fuel: +5 kW lifts 19:00 from 14 kW to 19 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 13:00 (value 7)"
                 },
                 {
                     "id": "jewellery",
-                    "reason": ""
+                    "reason": "fuel: +3 kW lifts 19:00 from 14 kW to 17 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 13:00 (value 7)"
                 },
                 {
                     "id": "clothing",
-                    "reason": ""
+                    "reason": "fuel: +2 kW lifts 19:00 from 14 kW to 16 kW (+0.80 L); day total would be 17.20 L > 17.00 L budget \u2014 diesel kept for mobile_shop at 18:00 (value 8), restaurant at 13:00 (value 7)"
                 }
             ],
             "load_kw": 14,
@@ -315,19 +318,19 @@
             "id": "mobile_shop",
             "kw": 3,
             "type": "normal",
-            "dark_hours": 5
+            "dark_hours": 4
         },
         {
             "id": "photocopy",
             "kw": 2,
             "type": "normal",
-            "dark_hours": 2
+            "dark_hours": 4
         },
         {
             "id": "tea_stall",
             "kw": 1,
             "type": "normal",
-            "dark_hours": 2
+            "dark_hours": 3
         },
         {
             "id": "beauty_salon",
@@ -363,7 +366,7 @@
             "id": "clothing",
             "kw": 2,
             "type": "normal",
-            "dark_hours": 4
+            "dark_hours": 3
         }
     ],
     "grid_available": [
