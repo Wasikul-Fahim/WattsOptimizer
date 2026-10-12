@@ -1,0 +1,396 @@
+{
+  "status": "ok",
+  "total_value": 183,
+  "total_fuel_litres": 16.8,
+  "fuel_budget_litres": 17.0,
+  "roster": [
+    {
+      "hour": 2,
+      "time": "12:00",
+      "powered": [
+        "pharmacy",
+        "atm_booth",
+        "photocopy",
+        "tea_stall",
+        "grocery_fridge",
+        "restaurant",
+        "clothing"
+      ],
+      "dark": [
+        {
+          "id": "tailor_jamal",
+          "reason": "capacity: 19 kW on + 4 kW = 23 kW > 20 kW"
+        },
+        {
+          "id": "mobile_shop",
+          "reason": "capacity: 19 kW on + 3 kW = 22 kW > 20 kW"
+        },
+        {
+          "id": "beauty_salon",
+          "reason": "capacity: 19 kW on + 4 kW = 23 kW > 20 kW"
+        },
+        {
+          "id": "electronics",
+          "reason": "capacity: 19 kW on + 5 kW = 24 kW > 20 kW"
+        },
+        {
+          "id": "jewellery",
+          "reason": "capacity: 19 kW on + 3 kW = 22 kW > 20 kW"
+        }
+      ],
+      "load_kw": 19,
+      "fuel_litres": 2.8,
+      "value": 30
+    },
+    {
+      "hour": 3,
+      "time": "13:00",
+      "powered": [
+        "pharmacy",
+        "atm_booth",
+        "photocopy",
+        "tea_stall",
+        "grocery_fridge",
+        "restaurant",
+        "clothing"
+      ],
+      "dark": [
+        {
+          "id": "tailor_jamal",
+          "reason": "capacity: 19 kW on + 4 kW = 23 kW > 20 kW"
+        },
+        {
+          "id": "mobile_shop",
+          "reason": "capacity: 19 kW on + 3 kW = 22 kW > 20 kW"
+        },
+        {
+          "id": "beauty_salon",
+          "reason": "capacity: 19 kW on + 4 kW = 23 kW > 20 kW"
+        },
+        {
+          "id": "electronics",
+          "reason": "capacity: 19 kW on + 5 kW = 24 kW > 20 kW"
+        },
+        {
+          "id": "jewellery",
+          "reason": "capacity: 19 kW on + 3 kW = 22 kW > 20 kW"
+        }
+      ],
+      "load_kw": 19,
+      "fuel_litres": 2.8,
+      "value": 31
+    },
+    {
+      "hour": 4,
+      "time": "14:00",
+      "powered": [
+        "pharmacy",
+        "atm_booth",
+        "tailor_jamal",
+        "mobile_shop",
+        "tea_stall",
+        "beauty_salon",
+        "jewellery"
+      ],
+      "dark": [
+        {
+          "id": "photocopy",
+          "reason": "capacity: 19 kW on + 2 kW = 21 kW > 20 kW"
+        },
+        {
+          "id": "grocery_fridge",
+          "reason": "capacity: 20 kW on + 3 kW = 23 kW > 20 kW"
+        },
+        {
+          "id": "electronics",
+          "reason": "capacity: 16 kW on + 5 kW = 21 kW > 20 kW"
+        },
+        {
+          "id": "restaurant",
+          "reason": "capacity: 19 kW on + 6 kW = 25 kW > 20 kW"
+        },
+        {
+          "id": "clothing",
+          "reason": "capacity: 20 kW on + 2 kW = 22 kW > 20 kW"
+        }
+      ],
+      "load_kw": 20,
+      "fuel_litres": 2.8,
+      "value": 26
+    },
+    {
+      "hour": 5,
+      "time": "15:00",
+      "powered": [
+        "pharmacy",
+        "atm_booth",
+        "tailor_jamal",
+        "beauty_salon",
+        "electronics",
+        "clothing"
+      ],
+      "dark": [
+        {
+          "id": "mobile_shop",
+          "reason": "capacity: 20 kW on + 3 kW = 23 kW > 20 kW"
+        },
+        {
+          "id": "photocopy",
+          "reason": "capacity: 20 kW on + 2 kW = 22 kW > 20 kW"
+        },
+        {
+          "id": "tea_stall",
+          "reason": "capacity: 20 kW on + 1 kW = 21 kW > 20 kW"
+        },
+        {
+          "id": "grocery_fridge",
+          "reason": "capacity: 20 kW on + 3 kW = 23 kW > 20 kW"
+        },
+        {
+          "id": "restaurant",
+          "reason": "capacity: 20 kW on + 6 kW = 26 kW > 20 kW"
+        },
+        {
+          "id": "jewellery",
+          "reason": "capacity: 20 kW on + 3 kW = 23 kW > 20 kW"
+        }
+      ],
+      "load_kw": 20,
+      "fuel_litres": 2.8,
+      "value": 26
+    },
+    {
+      "hour": 7,
+      "time": "17:00",
+      "powered": [
+        "pharmacy",
+        "atm_booth",
+        "mobile_shop",
+        "tea_stall",
+        "grocery_fridge",
+        "electronics",
+        "clothing"
+      ],
+      "dark": [
+        {
+          "id": "tailor_jamal",
+          "reason": "capacity: 18 kW on + 4 kW = 22 kW > 20 kW"
+        },
+        {
+          "id": "photocopy",
+          "reason": "capacity: 19 kW on + 2 kW = 21 kW > 20 kW"
+        },
+        {
+          "id": "beauty_salon",
+          "reason": "capacity: 18 kW on + 4 kW = 22 kW > 20 kW"
+        },
+        {
+          "id": "restaurant",
+          "reason": "capacity: 18 kW on + 6 kW = 24 kW > 20 kW"
+        },
+        {
+          "id": "jewellery",
+          "reason": "capacity: 18 kW on + 3 kW = 21 kW > 20 kW"
+        }
+      ],
+      "load_kw": 19,
+      "fuel_litres": 2.8,
+      "value": 35
+    },
+    {
+      "hour": 8,
+      "time": "18:00",
+      "powered": [
+        "pharmacy",
+        "atm_booth",
+        "mobile_shop",
+        "tea_stall",
+        "electronics",
+        "restaurant"
+      ],
+      "dark": [
+        {
+          "id": "tailor_jamal",
+          "reason": "capacity: 19 kW on + 4 kW = 23 kW > 20 kW"
+        },
+        {
+          "id": "photocopy",
+          "reason": "capacity: 20 kW on + 2 kW = 22 kW > 20 kW"
+        },
+        {
+          "id": "beauty_salon",
+          "reason": "capacity: 20 kW on + 4 kW = 24 kW > 20 kW"
+        },
+        {
+          "id": "grocery_fridge",
+          "reason": "capacity: 19 kW on + 3 kW = 22 kW > 20 kW"
+        },
+        {
+          "id": "jewellery",
+          "reason": "capacity: 19 kW on + 3 kW = 22 kW > 20 kW"
+        },
+        {
+          "id": "clothing",
+          "reason": "capacity: 19 kW on + 2 kW = 21 kW > 20 kW"
+        }
+      ],
+      "load_kw": 20,
+      "fuel_litres": 2.8,
+      "value": 35
+    },
+    {
+      "hour": 9,
+      "time": "19:00",
+      "powered": [],
+      "dark": [
+        {
+          "id": "pharmacy",
+          "reason": "fuel: lifting 19:00 to 3 kW costs 1.20 L; 18.00 L > 17.00 L budget"
+        },
+        {
+          "id": "atm_booth",
+          "reason": "fuel: lifting 19:00 to 2 kW costs 1.20 L; 18.00 L > 17.00 L budget"
+        },
+        {
+          "id": "tailor_jamal",
+          "reason": "fuel: lifting 19:00 to 4 kW costs 1.20 L; 18.00 L > 17.00 L budget"
+        },
+        {
+          "id": "mobile_shop",
+          "reason": "fuel: lifting 19:00 to 3 kW costs 1.20 L; 18.00 L > 17.00 L budget"
+        },
+        {
+          "id": "photocopy",
+          "reason": "fuel: lifting 19:00 to 2 kW costs 1.20 L; 18.00 L > 17.00 L budget"
+        },
+        {
+          "id": "tea_stall",
+          "reason": "fuel: lifting 19:00 to 1 kW costs 1.20 L; 18.00 L > 17.00 L budget"
+        },
+        {
+          "id": "beauty_salon",
+          "reason": "fuel: lifting 19:00 to 4 kW costs 1.20 L; 18.00 L > 17.00 L budget"
+        },
+        {
+          "id": "grocery_fridge",
+          "reason": "fuel: lifting 19:00 to 3 kW costs 1.20 L; 18.00 L > 17.00 L budget"
+        },
+        {
+          "id": "electronics",
+          "reason": "fuel: lifting 19:00 to 5 kW costs 1.20 L; 18.00 L > 17.00 L budget"
+        },
+        {
+          "id": "restaurant",
+          "reason": "fuel: lifting 19:00 to 6 kW costs 1.20 L; 18.00 L > 17.00 L budget"
+        },
+        {
+          "id": "jewellery",
+          "reason": "fuel: lifting 19:00 to 3 kW costs 1.20 L; 18.00 L > 17.00 L budget"
+        },
+        {
+          "id": "clothing",
+          "reason": "fuel: lifting 19:00 to 2 kW costs 1.20 L; 18.00 L > 17.00 L budget"
+        }
+      ],
+      "load_kw": 0,
+      "fuel_litres": 0.0,
+      "value": 0
+    }
+  ],
+  "shops": [
+    {
+      "id": "pharmacy",
+      "kw": 3,
+      "type": "mandatory",
+      "dark_hours": 1
+    },
+    {
+      "id": "atm_booth",
+      "kw": 2,
+      "type": "mandatory",
+      "dark_hours": 1
+    },
+    {
+      "id": "tailor_jamal",
+      "kw": 4,
+      "type": "normal",
+      "dark_hours": 5
+    },
+    {
+      "id": "mobile_shop",
+      "kw": 3,
+      "type": "normal",
+      "dark_hours": 4
+    },
+    {
+      "id": "photocopy",
+      "kw": 2,
+      "type": "normal",
+      "dark_hours": 5
+    },
+    {
+      "id": "tea_stall",
+      "kw": 1,
+      "type": "normal",
+      "dark_hours": 2
+    },
+    {
+      "id": "beauty_salon",
+      "kw": 4,
+      "type": "normal",
+      "dark_hours": 5
+    },
+    {
+      "id": "grocery_fridge",
+      "kw": 3,
+      "type": "normal",
+      "dark_hours": 4
+    },
+    {
+      "id": "electronics",
+      "kw": 5,
+      "type": "normal",
+      "dark_hours": 4
+    },
+    {
+      "id": "restaurant",
+      "kw": 6,
+      "type": "normal",
+      "dark_hours": 4
+    },
+    {
+      "id": "jewellery",
+      "kw": 3,
+      "type": "normal",
+      "dark_hours": 6
+    },
+    {
+      "id": "clothing",
+      "kw": 2,
+      "type": "normal",
+      "dark_hours": 3
+    }
+  ],
+  "grid_available": [
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false
+  ],
+  "solver": "greedy",
+  "_violations_found_by_our_checker": [
+    "rule 5: mandatory 'pharmacy' dark at [19]",
+    "rule 5: mandatory 'atm_booth' dark at [19]",
+    "rule 6: 'tailor_jamal' dark 3 hours in a row > 2",
+    "rule 6: 'photocopy' dark 3 hours in a row > 2",
+    "rule 6: 'beauty_salon' dark 3 hours in a row > 2",
+    "rule 6: 'electronics' dark 3 hours in a row > 2",
+    "rule 6: 'jewellery' dark 3 hours in a row > 2"
+  ]
+}

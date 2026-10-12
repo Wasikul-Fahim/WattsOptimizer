@@ -30,8 +30,8 @@ in minutes when the pack arrives.
 |---|---|---|
 | Stack | Python 3.11+, FastAPI + uvicorn, vanilla HTML/JS/CSS served by the same process | One start command (`python app.py`), no build step, one process to explain |
 | Solver | Exact integer model with OR-Tools CP-SAT (`ortools`), ~120 booleans | Provably optimal, solves in milliseconds, formulation maps 1:1 to the rules so it is easy to explain |
-| Solver fallback | `scipy.optimize.milp` (HiGHS) with the same formulation, used only if `ortools` cannot be installed offline | Same model, different engine |
-| "Earlier version" for evidence | A real greedy per-hour solver (`solver_greedy.py`) written first and kept | Honest bug→fix story, and a live demo of why the day must be planned as a whole |
+| Solver fallback | The greedy solver (`solver_greedy.py`) **only** — no second exact engine. Used automatically if `ortools` fails to import or CP-SAT returns no solution within its 5 s time limit; the response then carries `"solver": "greedy"` and a visible "best-effort, not proven optimal" banner | One exact formulation to maintain in 3.5 h; the greedy already exists by minute 35, so the fallback is free. A fallback result is never presented as the optimum |
+| "Earlier version" for evidence | The same greedy per-hour solver, written first and kept | Honest bug→fix story, a live demo of why the day must be planned as a whole, and it doubles as the runtime fallback |
 | Numbers | Litres handled as integer hundredths (centilitres) internally | Rule 4: "whole hundredths, no rounding tolerance" |
 | Port | 8000 | Stated in README |
 
@@ -43,8 +43,8 @@ HackApex/who-stays-on/
   whostayson/
     schema.py            # input validation → typed Input or InvalidInput(field, message)
     fuel.py              # fuel level lookup, centilitre helpers
-    solver.py            # THE decision logic (CP-SAT model) — README points here
-    solver_greedy.py     # v1 greedy, kept for evidence + comparison endpoint
+    solver.py            # THE decision logic (CP-SAT model) + solve() dispatcher — README points here
+    solver_greedy.py     # v1 greedy: evidence, comparison endpoint, and the runtime fallback
     reasons.py           # one-line reason for every dark cell
     diagnose.py          # infeasibility diagnosis + labelled best-effort roster
     output.py            # roster → output JSON (single place to match schema.md)
@@ -119,8 +119,13 @@ HackApex/who-stays-on/
    `best_effort_roster` (labelled) = mandatory-only roster or the relaxed solve.
 6. **Screen** (served at `/`, uses the same API):
    - Load JSON by file upload or paste; sample pre-filled; "Compute" button.
-   - Roster board: row per shop (★ for mandatory), columns 10:00…19:00, ✓/✗ for outage cells,
-     neutral "grid" for grid hours. Hover shows reason; a list of all ✗ reasons below.
+   - Roster board split into two visually distinct sections, **Mandatory shops** (★ badge,
+     "essential") and **Normal shops**, grouped by the input `type` field — never by name, works
+     for any valid input of ≤ 12 shops. One row per shop showing id, kW, type and total dark
+     hours; columns 10:00…19:00; ✓ powered / ✗ dark for outage cells, neutral "grid" for grid
+     hours (a grid hour is never shown as a decision). Hover shows reason; a list of all ✗
+     reasons below. Groups are derived from the API response plus the original shop metadata;
+     the frontend never schedules anything itself.
    - Per-hour row under the board: load / capacity, fuel this hour, running total / budget.
    - Summary: status, total value, total fuel, each shop's dark hours; infeasible conflict box.
    - Download output JSON. **What-if panel** (capacity, budget, max_dark, toggle an hour to
@@ -134,6 +139,10 @@ HackApex/who-stays-on/
 - Offline: dependencies pinned in `requirements.txt`; vendor wheels with
   `pip download -r requirements.txt -d wheels/` before the event so install works offline.
 - Deterministic output for the same input (fixed solver seed, single worker).
+- Exactly one exact solver. `solve()` in `solver.py` tries CP-SAT (import guarded, 5 s limit)
+  and otherwise calls `solver_greedy.solve()`; the output's `solver` field says which ran.
+  No scipy/HiGHS/PuLP second formulation — if `ortools` will not install offline, the demo
+  runs on greedy and says so rather than on untested code.
 - `app.py` ≤ 60 lines; `solver.py` ≤ 150 lines with docstrings naming the rule each constraint
   implements — "find the decision logic in under two minutes".
 
@@ -147,7 +156,7 @@ This becomes the first solver test and the README's walkthrough.
 |---|---|
 | 0–15 | Scaffold repo, `requirements.txt`, `schema.py` + tests for every invalid case, `fuel.py` |
 | 15–35 | `solver_greedy.py` (per-hour best value, dark-run guard) + `output.py` + `app.py` API. Craft an input where greedy drains the budget by evening / violates something → capture `evidence/bug_greedy_runs_dry/output_v1_greedy.json` |
-| 35–75 | `solver.py` CP-SAT model; `test_solver.py` (worked example = 84 / 8.00; brute-force cross-check on ≤5-shop random inputs; 12-shop random inputs < 2 s) |
+| 35–75 | `solver.py` CP-SAT model + `solve()` dispatcher; `test_solver.py` (worked example = 84 / 8.00; brute-force cross-check on ≤5-shop random inputs; 12-shop random inputs < 2 s; forced-fallback test: monkeypatch `ortools` import away → greedy result with `solver: "greedy"`) |
 | 75–95 | `reasons.py`, `diagnose.py`, `validate_output.py`; infeasible tests; capture fixed evidence output |
 | 95–140 | `static/` screen: board, hour rows, reasons, summary, upload/paste/download, what-if panel, print CSS |
 | 140–150 | Buffer; run `scripts/run_public.sh` on the sample, commit `outputs/` |
@@ -172,11 +181,13 @@ This becomes the first solver test and the README's walkthrough.
 1. `pytest` green: schema (each rule 9 case → 400 naming the field), solver (84/8.00 on the
    worked example; brute-force agreement on small random inputs; capacity, budget, dark-run,
    mandatory never violated on 200 random 12-shop inputs via `validate_output.py`), API
-   (status codes), no-outage day → empty roster and zero totals, empty shop list, `D = 0`,
+   (status codes), fallback path (`solver: "greedy"` when CP-SAT unavailable), no-outage day → empty roster and zero totals, empty shop list, `D = 0`,
    shop larger than generator, boundary inputs where load == capacity and fuel == budget.
 2. `python app.py` then `curl -X POST localhost:8000/api/roster -d @sample_input.json` < 1 s.
 3. Open `http://localhost:8000`, load sample, check board, hover reasons, what-if, print
-   preview fits one A4 page, download JSON equals API response.
+   preview fits one A4 page, download JSON equals API response. Every shop appears exactly
+   once, in the section matching its `type`; mandatory rows show ✓ in every outage hour;
+   grid hours show "grid"; every ✗ cell has a reason with numbers.
 4. Run from a fresh clone with the network off: `pip install --no-index --find-links wheels/
    -r requirements.txt && python app.py`.
 5. When `schema.md` / `example_output.json` / official validator arrive: diff our output keys

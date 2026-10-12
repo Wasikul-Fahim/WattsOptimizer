@@ -1,0 +1,382 @@
+{
+    "status": "ok",
+    "total_value": 186,
+    "total_fuel_litres": 16.4,
+    "fuel_budget_litres": 17.0,
+    "roster": [
+        {
+            "hour": 2,
+            "time": "12:00",
+            "powered": [
+                "pharmacy",
+                "atm_booth",
+                "photocopy",
+                "tea_stall",
+                "beauty_salon",
+                "clothing"
+            ],
+            "dark": [
+                {
+                    "id": "tailor_jamal",
+                    "reason": ""
+                },
+                {
+                    "id": "mobile_shop",
+                    "reason": ""
+                },
+                {
+                    "id": "grocery_fridge",
+                    "reason": ""
+                },
+                {
+                    "id": "electronics",
+                    "reason": ""
+                },
+                {
+                    "id": "restaurant",
+                    "reason": ""
+                },
+                {
+                    "id": "jewellery",
+                    "reason": ""
+                }
+            ],
+            "load_kw": 14,
+            "fuel_litres": 2.0,
+            "value": 23
+        },
+        {
+            "hour": 3,
+            "time": "13:00",
+            "powered": [
+                "pharmacy",
+                "atm_booth",
+                "photocopy",
+                "tea_stall",
+                "grocery_fridge",
+                "restaurant",
+                "jewellery"
+            ],
+            "dark": [
+                {
+                    "id": "tailor_jamal",
+                    "reason": ""
+                },
+                {
+                    "id": "mobile_shop",
+                    "reason": ""
+                },
+                {
+                    "id": "beauty_salon",
+                    "reason": ""
+                },
+                {
+                    "id": "electronics",
+                    "reason": ""
+                },
+                {
+                    "id": "clothing",
+                    "reason": ""
+                }
+            ],
+            "load_kw": 20,
+            "fuel_litres": 2.8,
+            "value": 31
+        },
+        {
+            "hour": 4,
+            "time": "14:00",
+            "powered": [
+                "pharmacy",
+                "atm_booth",
+                "tailor_jamal",
+                "mobile_shop",
+                "photocopy",
+                "tea_stall",
+                "electronics"
+            ],
+            "dark": [
+                {
+                    "id": "beauty_salon",
+                    "reason": ""
+                },
+                {
+                    "id": "grocery_fridge",
+                    "reason": ""
+                },
+                {
+                    "id": "restaurant",
+                    "reason": ""
+                },
+                {
+                    "id": "jewellery",
+                    "reason": ""
+                },
+                {
+                    "id": "clothing",
+                    "reason": ""
+                }
+            ],
+            "load_kw": 20,
+            "fuel_litres": 2.8,
+            "value": 26
+        },
+        {
+            "hour": 5,
+            "time": "15:00",
+            "powered": [
+                "pharmacy",
+                "atm_booth",
+                "photocopy",
+                "tea_stall",
+                "beauty_salon",
+                "clothing"
+            ],
+            "dark": [
+                {
+                    "id": "tailor_jamal",
+                    "reason": ""
+                },
+                {
+                    "id": "mobile_shop",
+                    "reason": ""
+                },
+                {
+                    "id": "grocery_fridge",
+                    "reason": ""
+                },
+                {
+                    "id": "electronics",
+                    "reason": ""
+                },
+                {
+                    "id": "restaurant",
+                    "reason": ""
+                },
+                {
+                    "id": "jewellery",
+                    "reason": ""
+                }
+            ],
+            "load_kw": 14,
+            "fuel_litres": 2.0,
+            "value": 24
+        },
+        {
+            "hour": 7,
+            "time": "17:00",
+            "powered": [
+                "pharmacy",
+                "atm_booth",
+                "photocopy",
+                "tea_stall",
+                "beauty_salon",
+                "grocery_fridge",
+                "jewellery",
+                "clothing"
+            ],
+            "dark": [
+                {
+                    "id": "tailor_jamal",
+                    "reason": ""
+                },
+                {
+                    "id": "mobile_shop",
+                    "reason": ""
+                },
+                {
+                    "id": "electronics",
+                    "reason": ""
+                },
+                {
+                    "id": "restaurant",
+                    "reason": ""
+                }
+            ],
+            "load_kw": 20,
+            "fuel_litres": 2.8,
+            "value": 34
+        },
+        {
+            "hour": 8,
+            "time": "18:00",
+            "powered": [
+                "pharmacy",
+                "atm_booth",
+                "tailor_jamal",
+                "electronics"
+            ],
+            "dark": [
+                {
+                    "id": "mobile_shop",
+                    "reason": ""
+                },
+                {
+                    "id": "photocopy",
+                    "reason": ""
+                },
+                {
+                    "id": "tea_stall",
+                    "reason": ""
+                },
+                {
+                    "id": "beauty_salon",
+                    "reason": ""
+                },
+                {
+                    "id": "grocery_fridge",
+                    "reason": ""
+                },
+                {
+                    "id": "restaurant",
+                    "reason": ""
+                },
+                {
+                    "id": "jewellery",
+                    "reason": ""
+                },
+                {
+                    "id": "clothing",
+                    "reason": ""
+                }
+            ],
+            "load_kw": 14,
+            "fuel_litres": 2.0,
+            "value": 22
+        },
+        {
+            "hour": 9,
+            "time": "19:00",
+            "powered": [
+                "pharmacy",
+                "atm_booth",
+                "mobile_shop",
+                "restaurant"
+            ],
+            "dark": [
+                {
+                    "id": "tailor_jamal",
+                    "reason": ""
+                },
+                {
+                    "id": "photocopy",
+                    "reason": ""
+                },
+                {
+                    "id": "tea_stall",
+                    "reason": ""
+                },
+                {
+                    "id": "beauty_salon",
+                    "reason": ""
+                },
+                {
+                    "id": "grocery_fridge",
+                    "reason": ""
+                },
+                {
+                    "id": "electronics",
+                    "reason": ""
+                },
+                {
+                    "id": "jewellery",
+                    "reason": ""
+                },
+                {
+                    "id": "clothing",
+                    "reason": ""
+                }
+            ],
+            "load_kw": 14,
+            "fuel_litres": 2.0,
+            "value": 26
+        }
+    ],
+    "shops": [
+        {
+            "id": "pharmacy",
+            "kw": 3,
+            "type": "mandatory",
+            "dark_hours": 0
+        },
+        {
+            "id": "atm_booth",
+            "kw": 2,
+            "type": "mandatory",
+            "dark_hours": 0
+        },
+        {
+            "id": "tailor_jamal",
+            "kw": 4,
+            "type": "normal",
+            "dark_hours": 5
+        },
+        {
+            "id": "mobile_shop",
+            "kw": 3,
+            "type": "normal",
+            "dark_hours": 5
+        },
+        {
+            "id": "photocopy",
+            "kw": 2,
+            "type": "normal",
+            "dark_hours": 2
+        },
+        {
+            "id": "tea_stall",
+            "kw": 1,
+            "type": "normal",
+            "dark_hours": 2
+        },
+        {
+            "id": "beauty_salon",
+            "kw": 4,
+            "type": "normal",
+            "dark_hours": 4
+        },
+        {
+            "id": "grocery_fridge",
+            "kw": 3,
+            "type": "normal",
+            "dark_hours": 5
+        },
+        {
+            "id": "electronics",
+            "kw": 5,
+            "type": "normal",
+            "dark_hours": 5
+        },
+        {
+            "id": "restaurant",
+            "kw": 6,
+            "type": "normal",
+            "dark_hours": 5
+        },
+        {
+            "id": "jewellery",
+            "kw": 3,
+            "type": "normal",
+            "dark_hours": 5
+        },
+        {
+            "id": "clothing",
+            "kw": 2,
+            "type": "normal",
+            "dark_hours": 4
+        }
+    ],
+    "grid_available": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false
+    ],
+    "solver": "cp-sat"
+}
