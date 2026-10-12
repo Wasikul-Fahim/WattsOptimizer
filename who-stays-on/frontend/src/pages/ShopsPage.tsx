@@ -82,7 +82,7 @@ export default function ShopsPage() {
             <CardContent>
               <DarkHoursChart analysis={analysis} />
               {analysis.maxConsecutiveDark !== null && (
-                <p className="mt-3 text-[12.5px] text-muted-foreground">
+                <p className="mt-3 text-[15px] text-muted-foreground">
                   Rule: no shop dark more than {analysis.maxConsecutiveDark} hours in a row. Grid hours reset the count.
                 </p>
               )}

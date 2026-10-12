@@ -1,96 +1,25 @@
-import { ArrowRight, CircleCheck, CircleX, ClipboardPaste, FileJson, FileUp, FlaskConical, RotateCcw, TriangleAlert, Zap } from "lucide-react";
-import { useCallback, useRef, useState, type DragEvent } from "react";
+import { ArrowRight, CircleCheck, CircleX, ClipboardPaste, FileUp, FlaskConical, RotateCcw, TriangleAlert, Zap } from "lucide-react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import sample from "@/assets/sample_input.json";
 import { PageHeader } from "@/components/common/PageHeader";
+import { InputSummary } from "@/components/upload/InputSummary";
+import { InputProblem, JsonDropzone } from "@/components/upload/JsonDropzone";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input, Label, Textarea } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useJsonInput } from "@/hooks/useJsonInput";
 import { useOptimization } from "@/hooks/useOptimization";
 import { useToast } from "@/hooks/useToast";
 import { HOURS } from "@/lib/format";
-import { parseInputText } from "@/lib/validate";
 import { cn } from "@/lib/utils";
 import type { MarketInput } from "@/types/api";
-
-const MAX_BYTES = 64 * 1024;
-
-function InputSummary({ input, name }: { input: MarketInput; name: string }) {
-  const outages = input.grid_available.filter((g) => !g).length;
-  const demand = input.shops.reduce((a, s) => a + s.kw, 0);
-  return (
-    <div className="grid gap-3">
-      <div className="flex items-center gap-2 text-sm font-bold">
-        <FileJson className="size-4 text-blue-ink" /> {name}
-      </div>
-      {input._story && <p className="text-[13px] text-muted-foreground">{input._story}</p>}
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-        {[
-          ["Shops", input.shops.length],
-          ["Outage hours", outages],
-          ["Capacity", `${input.generator_capacity_kw} kW`],
-          ["Demand", `${demand} kW`],
-        ].map(([k, v]) => (
-          <div key={k} className="rounded-xl border border-border bg-sunken px-3 py-2">
-            <div className="label-caps !text-[10px]">{k}</div>
-            <div className="text-lg font-black tabular">{v}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export default function UploadPage() {
   const { toast } = useToast();
   const { optimize, running, response, error, reset } = useOptimization();
-  const [input, setInput] = useState<MarketInput | null>(null);
-  const [original, setOriginal] = useState<MarketInput | null>(null);
-  const [name, setName] = useState("");
+  const { input, setInput, original, name, problem, accept, readFile, loadSample } = useJsonInput(reset);
   const [paste, setPaste] = useState("");
-  const [problem, setProblem] = useState<{ field: string; message: string } | null>(null);
-  const [dragging, setDragging] = useState(false);
-  const fileRef = useRef<HTMLInputElement>(null);
-
-  const accept = useCallback(
-    (text: string, label: string) => {
-      reset();
-      const checked = parseInputText(text);
-      if (!checked.ok) {
-        setProblem({ field: checked.field, message: checked.message });
-        setInput(null);
-        return;
-      }
-      setProblem(null);
-      setInput(checked.input);
-      setOriginal(structuredClone(checked.input));
-      setName(label);
-    },
-    [reset],
-  );
-
-  const readFile = useCallback(
-    (file: File) => {
-      if (!/\.json$/i.test(file.name) && file.type !== "application/json") {
-        setProblem({ field: "file", message: `${file.name} is not a .json file` });
-        return;
-      }
-      if (file.size > MAX_BYTES) {
-        setProblem({ field: "file", message: `File is ${(file.size / 1024).toFixed(0)} KB; the limit is 64 KB` });
-        return;
-      }
-      file.text().then((t) => accept(t, file.name));
-    },
-    [accept],
-  );
-
-  function onDrop(e: DragEvent) {
-    e.preventDefault();
-    setDragging(false);
-    const f = e.dataTransfer.files?.[0];
-    if (f) readFile(f);
-  }
 
   async function run(publish: boolean) {
     if (!input) return;
@@ -117,7 +46,7 @@ export default function UploadPage() {
     <div className="grid gap-6">
       <PageHeader eyebrow="Secretary" title="Upload market data" />
 
-      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_380px]">
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_420px]">
         <div className="grid gap-6">
           <Tabs defaultValue="file">
             <TabsList>
@@ -129,39 +58,9 @@ export default function UploadPage() {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="file" className="mt-4">
-              <label
-                htmlFor="file-input"
-                onDragOver={(e) => {
-                  e.preventDefault();
-                  setDragging(true);
-                }}
-                onDragLeave={() => setDragging(false)}
-                onDrop={onDrop}
-                className={cn(
-                  "flex cursor-pointer flex-col items-center rounded-2xl border-[1.5px] border-dashed border-blue/45 bg-blue/4 px-6 py-12 text-center transition-colors hover:border-teal hover:bg-teal/8",
-                  dragging && "border-teal bg-teal/10",
-                )}
-              >
-                <div className="grid size-14 place-items-center rounded-2xl bg-brand-gradient text-[#05222f]">
-                  <FileUp className="size-6" />
-                </div>
-                <div className="mt-3 text-[16px] font-bold">Drop market JSON here</div>
-                <div className="text-[13px] text-muted-foreground">or click to browse · .json up to 64 KB</div>
-                <input
-                  ref={fileRef}
-                  id="file-input"
-                  type="file"
-                  accept=".json,application/json"
-                  className="hidden"
-                  onChange={(e) => {
-                    const f = e.target.files?.[0];
-                    if (f) readFile(f);
-                    e.target.value = "";
-                  }}
-                />
-              </label>
+              <JsonDropzone onFile={readFile} />
               <div className="mt-3 flex justify-center">
-                <Button variant="ghost" size="sm" onClick={() => accept(JSON.stringify(sample), "sample_input.json (practice)")}>
+                <Button variant="ghost" size="sm" onClick={loadSample}>
                   <FlaskConical /> Load practice input
                 </Button>
               </div>
@@ -176,17 +75,7 @@ export default function UploadPage() {
             </TabsContent>
           </Tabs>
 
-          {problem && (
-            <div className="flex gap-3 rounded-2xl border border-danger/35 bg-danger/8 p-4 text-sm">
-              <CircleX className="mt-0.5 size-5 shrink-0 text-danger-ink" />
-              <div>
-                <div className="font-bold">Can't use this file</div>
-                <div className="mt-0.5 text-muted-foreground">
-                  <span className="font-mono text-danger-ink">{problem.field}</span>: {problem.message}
-                </div>
-              </div>
-            </div>
-          )}
+          {problem && <InputProblem problem={problem} />}
 
           {input && (
             <Card>
@@ -206,12 +95,12 @@ export default function UploadPage() {
                   {response.status === "invalid_input" ? (
                     <>
                       <div className="font-bold">Server rejected the input</div>
-                      <div className="text-[13px] text-muted-foreground">{response.message}</div>
+                      <div className="text-[15.5px] text-muted-foreground">{response.message}</div>
                     </>
                   ) : (
                     <>
                       <div className="font-bold">{response.status === "ok" ? "Roster ready" : "Infeasible · best effort attached"}</div>
-                      <div className="text-[13px] text-muted-foreground tabular">
+                      <div className="text-[15.5px] text-muted-foreground tabular">
                         Value {response.total_value} · Fuel {response.total_fuel_litres.toFixed(2)} / {response.fuel_budget_litres.toFixed(2)} L
                       </div>
                     </>
@@ -241,7 +130,7 @@ export default function UploadPage() {
           </CardHeader>
           <CardContent className="grid gap-4">
             {!input ? (
-              <p className="text-[13px] text-muted-foreground">Load an input to adjust capacity, fuel or the grid schedule before running.</p>
+              <p className="text-[15.5px] text-muted-foreground">Load an input to adjust capacity, fuel or the grid schedule before running.</p>
             ) : (
               <>
                 <div className="grid grid-cols-2 gap-3">
@@ -254,7 +143,7 @@ export default function UploadPage() {
                     <Input id="budget" type="number" min={0} step={0.1} value={input.fuel_budget_litres} onChange={(e) => edit({ fuel_budget_litres: Number(e.target.value) })} />
                   </div>
                 </div>
-                <p className="-mt-2 text-[11.5px] text-muted-foreground">Top fuel level follows capacity.</p>
+                <p className="-mt-2 text-[14px] text-muted-foreground">Top fuel level follows capacity.</p>
                 <div className="grid gap-1.5">
                   <Label htmlFor="maxdark">Max dark hours in a row</Label>
                   <Input id="maxdark" type="number" min={0} max={10} value={input.max_consecutive_dark} onChange={(e) => edit({ max_consecutive_dark: Number(e.target.value) })} />
@@ -267,7 +156,7 @@ export default function UploadPage() {
                         key={i}
                         type="button"
                         onClick={() => edit({ grid_available: input.grid_available.map((x, j) => (j === i ? !x : x)) })}
-                        className={cn("cursor-pointer rounded-lg border py-2 font-mono text-[10.5px] font-bold", g ? "cell-grid" : "cell-off")}
+                        className={cn("cursor-pointer rounded-lg border py-2 font-mono text-[12.5px] font-bold", g ? "cell-grid" : "cell-off")}
                         aria-pressed={!g}
                         title={g ? "Grid on" : "Outage"}
                       >
@@ -275,7 +164,7 @@ export default function UploadPage() {
                       </button>
                     ))}
                   </div>
-                  <div className="text-[11.5px] text-muted-foreground">Red = outage, gray = grid</div>
+                  <div className="text-[14px] text-muted-foreground">Red = outage, gray = grid</div>
                 </div>
               </>
             )}
@@ -286,7 +175,7 @@ export default function UploadPage() {
               <Button variant="secondary" disabled={!input || running} onClick={() => void run(false)}>
                 Preview only
               </Button>
-              <p className="text-center text-[11.5px] text-muted-foreground">Publishing makes it today's roster for all committees.</p>
+              <p className="text-center text-[14px] text-muted-foreground">Publishing makes it today's roster for all committees.</p>
             </div>
           </CardContent>
         </Card>

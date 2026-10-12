@@ -23,7 +23,7 @@ export function FuelChart({ analysis, height = 280 }: { analysis: Analysis; heig
           <ComposedChart data={data} margin={{ top: 8, right: 18, bottom: 0, left: -12 }}>
             <CartesianGrid vertical={false} />
             <XAxis dataKey="time" tickLine={false} axisLine={false} />
-            <YAxis tickLine={false} axisLine={false} domain={[0, Math.ceil(max)]} unit=" L" width={56} />
+            <YAxis tickLine={false} axisLine={false} domain={[0, Math.ceil(max)]} unit=" L" width={62} />
             <Tooltip cursor={{ fill: c.cursor }} content={<ChartTooltip unit="L" formatter={(v) => `${v.toFixed(2)} L`} />} />
             <ReferenceLine y={analysis.fuelBudget} stroke={c.danger} strokeWidth={1.5} />
             <Bar dataKey="hourly" name="This hour" fill={c.blue} radius={[4, 4, 0, 0]} maxBarSize={34} />

@@ -18,7 +18,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, React.TextareaHTML
     <textarea
       ref={ref}
       className={cn(
-        "w-full rounded-xl border border-border bg-sunken p-3 font-mono text-[12.5px] leading-relaxed text-foreground focus:border-blue focus:shadow-[0_0_0_3px_rgb(0_168_255/0.2)] focus:outline-none",
+        "w-full rounded-xl border border-border bg-sunken p-3 font-mono text-[15px] leading-relaxed text-foreground focus:border-blue focus:shadow-[0_0_0_3px_rgb(0_168_255/0.2)] focus:outline-none",
         className,
       )}
       {...props}
@@ -28,5 +28,5 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, React.TextareaHTML
 Textarea.displayName = "Textarea";
 
 export function Label({ className, ...props }: React.LabelHTMLAttributes<HTMLLabelElement>) {
-  return <label className={cn("text-[12.5px] text-muted-foreground", className)} {...props} />;
+  return <label className={cn("text-[15px] text-muted-foreground", className)} {...props} />;
 }

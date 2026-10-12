@@ -13,10 +13,10 @@ export function ValueByHourChart({ analysis, height = 240 }: { analysis: Analysi
         <BarChart data={data} margin={{ top: 18, right: 18, bottom: 0, left: -20 }}>
           <CartesianGrid vertical={false} />
           <XAxis dataKey="time" tickLine={false} axisLine={false} />
-          <YAxis tickLine={false} axisLine={false} width={44} />
+          <YAxis tickLine={false} axisLine={false} width={50} />
           <Tooltip cursor={{ fill: c.cursor }} content={<ChartTooltip unit="pts" />} />
           <Bar dataKey="value" name="Value" fill={c.teal} radius={[4, 4, 0, 0]} maxBarSize={34}>
-            <LabelList dataKey="value" position="top" className="fill-[var(--muted-foreground)] font-mono text-[11px]" />
+            <LabelList dataKey="value" position="top" className="fill-[var(--muted-foreground)] font-mono text-[13px]" />
           </Bar>
         </BarChart>
       </ResponsiveContainer>
@@ -36,7 +36,7 @@ export function ShopsPerHourChart({ analysis, height = 240 }: { analysis: Analys
           <BarChart data={data} margin={{ top: 8, right: 18, bottom: 0, left: -20 }}>
             <CartesianGrid vertical={false} />
             <XAxis dataKey="time" tickLine={false} axisLine={false} />
-            <YAxis tickLine={false} axisLine={false} allowDecimals={false} width={44} />
+            <YAxis tickLine={false} axisLine={false} allowDecimals={false} width={50} />
             <Tooltip cursor={{ fill: c.cursor }} content={<ChartTooltip unit="shops" />} />
             <Bar dataKey="powered" name="Powered" stackId="s" fill={c.success} stroke={c.surface} strokeWidth={2} maxBarSize={34} />
             <Bar dataKey="dark" name="Dark" stackId="s" fill={c.danger} stroke={c.surface} strokeWidth={2} radius={[4, 4, 0, 0]} maxBarSize={34} />
@@ -60,13 +60,13 @@ export function ShopValueChart({ analysis }: { analysis: Analysis }) {
       <ResponsiveContainer>
         <BarChart data={data} layout="vertical" margin={{ top: 0, right: 36, bottom: 0, left: 8 }}>
           <XAxis type="number" hide />
-          <YAxis type="category" dataKey="name" tickLine={false} axisLine={false} width={112} interval={0} />
+          <YAxis type="category" dataKey="name" tickLine={false} axisLine={false} width={136} interval={0} />
           <Tooltip cursor={{ fill: c.cursor }} content={<ChartTooltip unit="pts" />} />
           <Bar dataKey="value" name="Value served" radius={[0, 4, 4, 0]} barSize={16} background={{ fill: c.track, radius: 4 }}>
             {data.map((d) => (
               <Cell key={d.name} fill={d.mandatory ? c.blue : c.teal} />
             ))}
-            <LabelList dataKey="value" position="right" className="fill-[var(--foreground)] font-mono text-[11px] font-bold" />
+            <LabelList dataKey="value" position="right" className="fill-[var(--foreground)] font-mono text-[13px] font-bold" />
           </Bar>
         </BarChart>
       </ResponsiveContainer>
@@ -88,10 +88,10 @@ export function DarkHoursChart({ analysis }: { analysis: Analysis }) {
         <ResponsiveContainer>
           <BarChart data={data} layout="vertical" margin={{ top: 0, right: 28, bottom: 0, left: 8 }} barGap={2}>
             <XAxis type="number" hide allowDecimals={false} />
-            <YAxis type="category" dataKey="name" tickLine={false} axisLine={false} width={112} interval={0} />
+            <YAxis type="category" dataKey="name" tickLine={false} axisLine={false} width={136} interval={0} />
             <Tooltip cursor={{ fill: c.cursor }} content={<ChartTooltip unit="h" />} />
             <Bar dataKey="dark" name="Dark hours" fill={c.danger} radius={[0, 4, 4, 0]} barSize={10}>
-              <LabelList dataKey="dark" position="right" className="fill-[var(--muted-foreground)] font-mono text-[11px]" />
+              <LabelList dataKey="dark" position="right" className="fill-[var(--muted-foreground)] font-mono text-[13px]" />
             </Bar>
             <Bar dataKey="run" name="Longest run" fill={c.warning} radius={[0, 4, 4, 0]} barSize={10} />
           </BarChart>

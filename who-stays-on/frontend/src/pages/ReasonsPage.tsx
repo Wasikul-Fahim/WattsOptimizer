@@ -24,7 +24,7 @@ export default function ReasonsPage() {
 
   const chip = (active: boolean) =>
     cn(
-      "cursor-pointer rounded-full border px-3 py-1.5 text-[12.5px] font-bold transition-colors",
+      "cursor-pointer rounded-full border px-3 py-1.5 text-[15px] font-bold transition-colors",
       active ? "border-blue bg-blue/12 text-blue-ink" : "border-border bg-surface text-muted-foreground hover:text-foreground",
     );
 
@@ -34,7 +34,7 @@ export default function ReasonsPage() {
       {!analysis ? (
         <EmptyState />
       ) : (
-        <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_300px]">
+        <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
           <div className="grid gap-4">
             <div className="flex flex-wrap gap-2">
               <button className={chip(activeHour === "all")} onClick={() => setHour("all")}>

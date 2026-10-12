@@ -89,6 +89,14 @@
   --color-warning-ink: var(--warning-ink);
   --color-danger-ink: var(--danger-ink);
 
+  /* Type scale: 1.2x Tailwind defaults */
+  --text-xs: 0.9rem;
+  --text-sm: 1.05rem;
+  --text-base: 1.2rem;
+  --text-lg: 1.35rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.8rem;
+
   --font-display: "Orbitron", "Lato", system-ui, sans-serif;
   --font-sans: "Lato", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
@@ -111,6 +119,7 @@
     background: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);
+    font-size: 1.2rem;
     -webkit-font-smoothing: antialiased;
     transition: background-color 0.3s, color 0.3s;
   }
@@ -134,7 +143,7 @@
 }
 @utility label-caps {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -183,7 +192,7 @@
 .recharts-cartesian-axis-tick-value {
   fill: var(--muted-foreground);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 13px;
 }
 .recharts-cartesian-grid line {
   stroke: var(--chart-grid);

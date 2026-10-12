@@ -63,7 +63,7 @@ export default function UsersPage() {
   return (
     <div className="grid gap-6">
       <PageHeader eyebrow="Admin" title="Users" />
-      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_340px]">
+      <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_380px]">
         <Card className="overflow-hidden">
           {!users ? (
             <CardContent>
@@ -126,7 +126,7 @@ export default function UsersPage() {
                       type="button"
                       onClick={() => setForm({ ...form, role: r })}
                       aria-pressed={form.role === r}
-                      className={`cursor-pointer rounded-lg border py-2 text-[12.5px] font-bold capitalize ${form.role === r ? "border-blue bg-blue/12 text-blue-ink" : "border-border text-muted-foreground"}`}
+                      className={`cursor-pointer rounded-lg border py-2 text-[15px] font-bold capitalize ${form.role === r ? "border-blue bg-blue/12 text-blue-ink" : "border-border text-muted-foreground"}`}
                     >
                       {r}
                     </button>

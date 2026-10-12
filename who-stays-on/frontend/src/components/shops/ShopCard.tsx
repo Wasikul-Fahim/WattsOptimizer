@@ -19,8 +19,8 @@ export function ShopCard({ shop, maxRun, index = 0 }: { shop: ShopView; maxRun: 
     >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
-          <h3 className="truncate text-[16px] font-black">{shopName(shop.id)}</h3>
-          <div className="mt-0.5 font-mono text-[11px] text-muted-foreground">{shop.id}</div>
+          <h3 className="truncate text-[19px] font-black">{shopName(shop.id)}</h3>
+          <div className="mt-0.5 font-mono text-[13px] text-muted-foreground">{shop.id}</div>
         </div>
         {shop.type === "mandatory" ? (
           <Badge variant="mandatory">
@@ -33,18 +33,18 @@ export function ShopCard({ shop, maxRun, index = 0 }: { shop: ShopView; maxRun: 
 
       <div className="mt-4 grid grid-cols-3 gap-2">
         <div>
-          <div className="label-caps !text-[10px]">Power</div>
+          <div className="label-caps !text-[12px]">Power</div>
           <div className="text-lg font-black tabular">
             {shop.kw}
             <span className="ml-0.5 text-xs font-normal text-muted-foreground">kW</span>
           </div>
         </div>
         <div>
-          <div className="label-caps !text-[10px]">Value</div>
+          <div className="label-caps !text-[12px]">Value</div>
           <div className="text-lg font-black tabular">{shop.valueServed ?? "—"}</div>
         </div>
         <div>
-          <div className="label-caps !text-[10px]">Dark</div>
+          <div className="label-caps !text-[12px]">Dark</div>
           <div className={cn("text-lg font-black tabular", shop.darkHours > 0 && "text-danger-ink")}>
             {shop.darkHours}
             <span className="ml-0.5 text-xs font-normal text-muted-foreground">h</span>
@@ -63,7 +63,7 @@ export function ShopCard({ shop, maxRun, index = 0 }: { shop: ShopView; maxRun: 
         ))}
       </div>
 
-      <div className="mt-4 flex items-center justify-between text-[12px]">
+      <div className="mt-4 flex items-center justify-between text-[14.5px]">
         <Badge variant={statusVariant}>{status}</Badge>
         <span className="text-muted-foreground">
           Longest dark run <b className="text-foreground tabular">{shop.longestDarkRun}h</b>
@@ -72,7 +72,7 @@ export function ShopCard({ shop, maxRun, index = 0 }: { shop: ShopView; maxRun: 
       </div>
       {shop.valueDemand !== null && shop.valueDemand > 0 && (
         <div className="mt-3">
-          <div className="flex justify-between text-[11.5px] text-muted-foreground">
+          <div className="flex justify-between text-[14px] text-muted-foreground">
             <span>Value captured</span>
             <span className="font-mono tabular">
               {shop.valueServed}/{shop.valueDemand}

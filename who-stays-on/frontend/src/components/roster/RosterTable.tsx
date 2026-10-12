@@ -23,12 +23,12 @@ export function RosterTable({ analysis, onSelect, showSummary = true, filter = "
   return (
     <TooltipProvider>
       <div className="overflow-x-auto rounded-2xl border border-border bg-card shadow-card print:overflow-visible print:shadow-none">
-        <table className="w-full min-w-[880px] border-separate border-spacing-1 tabular print:min-w-0 print:border-spacing-[2px]">
+        <table className="w-full min-w-[1000px] border-separate border-spacing-1 tabular print:min-w-0 print:border-spacing-[2px]">
           <thead>
             <tr>
-              <th className="sticky left-0 z-10 bg-card pl-3 text-left font-mono text-[11px] font-bold tracking-[0.06em] text-muted-foreground">SHOP</th>
+              <th className="sticky left-0 z-10 bg-card pl-3 text-left font-mono text-[13px] font-bold tracking-[0.06em] text-muted-foreground">SHOP</th>
               {HOURS.map((h, i) => (
-                <th key={h} className={cn("px-0.5 py-2 text-center font-mono text-[11px] font-bold print:py-0.5", analysis.hours[i].grid ? "text-grid-ink" : "text-foreground")}>
+                <th key={h} className={cn("px-0.5 py-2 text-center font-mono text-[13px] font-bold print:py-0.5", analysis.hours[i].grid ? "text-grid-ink" : "text-foreground")}>
                   {h}
                 </th>
               ))}
@@ -40,7 +40,7 @@ export function RosterTable({ analysis, onSelect, showSummary = true, filter = "
             ))}
           </tbody>
           {showSummary && (
-            <tfoot className="font-mono text-[11px] text-muted-foreground print:text-[9.5px]">
+            <tfoot className="font-mono text-[13px] text-muted-foreground print:text-[9.5px]">
               <tr>
                 <td className="sticky left-0 bg-card pl-3 pt-3 font-bold">Load / capacity</td>
                 {analysis.hours.map((h) => (
@@ -82,7 +82,7 @@ export function RosterTable({ analysis, onSelect, showSummary = true, filter = "
 
 export function RosterLegend() {
   return (
-    <div className="flex flex-wrap items-center gap-4 text-[12.5px] text-muted-foreground print:text-[10px]">
+    <div className="flex flex-wrap items-center gap-4 text-[15px] text-muted-foreground print:text-[10px]">
       <span className="inline-flex items-center gap-2">
         <i className="cell-on h-[18px] w-7 rounded-md border" /> Powered
       </span>

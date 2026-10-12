@@ -19,8 +19,8 @@ const ICON: Record<ReasonKind, typeof Fuel> = {
 function Stat({ label, value, tone }: { label: string; value: string; tone?: "danger" }) {
   return (
     <div className="rounded-[10px] border border-border bg-sunken px-3 py-2">
-      <div className="font-mono text-[10px] font-bold uppercase tracking-[0.1em] text-muted-foreground">{label}</div>
-      <div className={cn("text-[17px] font-black tabular", tone === "danger" && "text-danger-ink")}>{value}</div>
+      <div className="font-mono text-[12px] font-bold uppercase tracking-[0.1em] text-muted-foreground">{label}</div>
+      <div className={cn("text-[20.5px] font-black tabular", tone === "danger" && "text-danger-ink")}>{value}</div>
     </div>
   );
 }
@@ -39,7 +39,7 @@ function OverflowBar({ base, add, limit, unit }: { base: number; add: number; li
         />
         <div className="absolute -inset-y-1.5 w-0.5 bg-foreground" style={{ left: w(limit) }} />
       </div>
-      <div className="mt-1.5 flex justify-between font-mono text-[11px] text-muted-foreground">
+      <div className="mt-1.5 flex justify-between font-mono text-[13px] text-muted-foreground">
         <span>
           Would be {+(base + add).toFixed(2)} {unit}
         </span>
@@ -70,7 +70,7 @@ export function ReasonCard({ item, index = 0, highlight }: { item: DarkItem; ind
           <Icon className="size-[18px]" />
         </div>
         <div className="min-w-0 flex-1">
-          <div className="truncate text-[15px] font-bold">
+          <div className="truncate text-[18px] font-bold">
             {shopName(item.shopId)} dark at {item.time}
           </div>
           <div className="text-xs text-muted-foreground">{r.title}</div>
@@ -87,7 +87,7 @@ export function ReasonCard({ item, index = 0, highlight }: { item: DarkItem; ind
             </div>
             <OverflowBar base={r.dayTotalLitres - (r.extraLitres ?? 0)} add={r.extraLitres ?? 0} limit={r.budgetLitres} unit="L" />
             {r.keptFor && r.keptFor.length > 0 && (
-              <p className="text-[13px] text-muted-foreground">
+              <p className="text-[15.5px] text-muted-foreground">
                 Diesel saved for{" "}
                 {r.keptFor.map((k, i) => (
                   <span key={i}>
@@ -119,7 +119,7 @@ export function ReasonCard({ item, index = 0, highlight }: { item: DarkItem; ind
             <Stat label="Generator" value={`${r.capacityKw} kW`} />
           </div>
         )}
-        <p className="font-mono text-[11.5px] leading-relaxed text-muted-foreground">{r.raw}</p>
+        <p className="font-mono text-[14px] leading-relaxed text-muted-foreground">{r.raw}</p>
       </div>
     </motion.article>
   );

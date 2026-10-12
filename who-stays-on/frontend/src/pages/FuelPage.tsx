@@ -73,14 +73,14 @@ export default function FuelPage() {
                 <CardTitle>Fuel table</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="mb-3 text-[13px] text-muted-foreground">Fuel is charged once per hour on the combined load, rounded up to the next level.</p>
+                <p className="mb-3 text-[15.5px] text-muted-foreground">Fuel is charged once per hour on the combined load, rounded up to the next level.</p>
                 <div className="grid gap-2 sm:grid-cols-3">
                   {table.map((row) => (
                     <div
                       key={row.load_kw}
                       className={cn("rounded-xl border border-border bg-sunken px-4 py-3", usedLevels.has(row.litres_per_hour) && "border-teal/50 bg-teal/8")}
                     >
-                      <div className="label-caps !text-[10px]">Up to {row.load_kw} kW</div>
+                      <div className="label-caps !text-[12px]">Up to {row.load_kw} kW</div>
                       <div className="mt-1 text-xl font-black tabular">
                         {row.litres_per_hour.toFixed(2)} <span className="text-xs font-normal text-muted-foreground">L / hour</span>
                       </div>

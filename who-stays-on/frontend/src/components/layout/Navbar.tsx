@@ -26,10 +26,10 @@ export function Navbar() {
       <div className="flex h-16 items-center gap-3 px-6 max-md:px-4">
         <div className="flex min-w-0 items-center gap-3">
           {analysis && <ResultStatusBadge analysis={analysis} />}
-          <span className="truncate text-[13px] text-muted-foreground">{source}</span>
+          <span className="truncate text-[15.5px] text-muted-foreground">{source}</span>
         </div>
         <div className="flex-1" />
-        <span className="font-mono text-[12px] font-medium text-muted-foreground tabular max-md:hidden">
+        <span className="font-mono text-[14.5px] font-medium text-muted-foreground tabular max-md:hidden">
           {now.toLocaleDateString(undefined, { weekday: "short", day: "numeric", month: "short" })} · {now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
         </span>
         <Button variant="ghost" size="icon-sm" onClick={() => void refresh()} title="Reload today's roster" aria-label="Reload today's roster">

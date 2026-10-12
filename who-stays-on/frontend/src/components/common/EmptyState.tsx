@@ -24,9 +24,6 @@ export function EmptyState({ title = "No roster yet", text }: { title?: string; 
             </Link>
           </Button>
         )}
-        <Button variant="secondary" asChild>
-          <Link to="/api">Try the API</Link>
-        </Button>
       </div>
     </Card>
   );

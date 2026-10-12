@@ -46,10 +46,10 @@ export default function ReportPage() {
         <article className="grid gap-5 rounded-2xl border border-border bg-surface p-7 shadow-card print:gap-3 print:border-0 print:p-0 print:shadow-none">
           <header className="flex flex-wrap items-center justify-between gap-4 border-b border-border pb-5 print:pb-2">
             <div className="flex items-center gap-4">
-              <img src={logo} alt="" className="h-14 w-auto rounded-lg bg-white print:h-10" />
+              <img src={logo} alt="" className="size-[84px] shrink-0 object-contain print:size-14" />
               <div>
-                <div className="font-display text-[15px] font-bold tracking-[0.14em]">WATTSOPTIMIZER</div>
-                <div className="text-[13px] text-muted-foreground">
+                <div className="font-display text-[18px] font-bold tracking-[0.14em]">WATTSOPTIMIZER</div>
+                <div className="text-[15.5px] text-muted-foreground">
                   Generator roster · {date.toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
                 </div>
               </div>
@@ -57,7 +57,7 @@ export default function ReportPage() {
             <ResultStatusBadge analysis={analysis} />
           </header>
 
-          {current.input?._story && <p className="text-[13px] text-muted-foreground print:text-[10px]">{current.input._story}</p>}
+          {current.input?._story && <p className="text-[15.5px] text-muted-foreground print:text-[10px]">{current.input._story}</p>}
           <ConflictBanner result={current.result} />
 
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-5 print:grid-cols-5 print:gap-2">
@@ -69,7 +69,7 @@ export default function ReportPage() {
               ["Outage hours", `${analysis.outageHours.length}`],
             ].map(([k, v]) => (
               <div key={k} className="rounded-xl border border-border px-3 py-2 print:py-0.5">
-                <div className="label-caps !text-[10px]">{k}</div>
+                <div className="label-caps !text-[12px]">{k}</div>
                 <div className="text-lg font-black tabular print:text-[13px]">{v}</div>
               </div>
             ))}
@@ -78,7 +78,7 @@ export default function ReportPage() {
           <RosterTable analysis={analysis} />
           <RosterLegend />
 
-          <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-[12.5px] sm:grid-cols-4 print:grid-cols-6 print:text-[10px]">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-[15px] sm:grid-cols-4 print:grid-cols-6 print:text-[10px]">
             {analysis.shops.map((s) => (
               <div key={s.id} className="flex justify-between border-b border-border py-1">
                 <span>{shopName(s.id)}</span>
@@ -87,7 +87,7 @@ export default function ReportPage() {
             ))}
           </div>
 
-          <footer className="flex justify-between text-[11px] text-muted-foreground print:text-[9px]">
+          <footer className="flex justify-between text-[13px] text-muted-foreground print:text-[9px]">
             <span>Solver: {analysis.solver}</span>
             <span>Printed from WattsOptimizer</span>
           </footer>

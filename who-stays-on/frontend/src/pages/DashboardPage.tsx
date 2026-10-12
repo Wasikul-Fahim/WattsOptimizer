@@ -1,4 +1,5 @@
 import { ArrowRight, Coins, Cpu, FileUp, Fuel, Gauge, MoonStar, PlugZap, Sparkles, Store, Unplug, Zap } from "lucide-react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FuelChart } from "@/components/charts/FuelChart";
 import { LoadChart } from "@/components/charts/LoadChart";
@@ -12,6 +13,7 @@ import { LoadGauge } from "@/components/dashboard/LoadGauge";
 import { MetricCard } from "@/components/dashboard/MetricCard";
 import { StatusCard } from "@/components/dashboard/StatusCard";
 import { RosterLegend, RosterTable } from "@/components/roster/RosterTable";
+import { UpdateJsonDialog } from "@/components/upload/UpdateJsonDialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuth } from "@/hooks/useAuth";
@@ -64,23 +66,22 @@ function LiveStatus({ analysis }: { analysis: Analysis }) {
 export default function DashboardPage() {
   const { analysis, previousAnalysis: prev, current, loading } = useRoster();
   const { can } = useAuth();
+  const [updating, setUpdating] = useState(false);
 
   return (
     <div className="grid gap-6">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <LogoMark size={52} className="max-sm:hidden" />
+          <LogoMark size={78} className="max-sm:hidden" />
           <div>
             <div className="label-caps !text-blue-ink">Control center</div>
-            <h1 className="mt-1 text-[28px] font-black leading-tight">Today's power plan</h1>
+            <h1 className="mt-1 text-[33.5px] font-black leading-tight">Today's power plan</h1>
           </div>
         </div>
         <div className="flex gap-2">
           {can("secretary") && (
-            <Button variant="secondary" asChild>
-              <Link to="/upload">
-                <FileUp /> Upload JSON
-              </Link>
+            <Button variant="secondary" onClick={() => setUpdating(true)}>
+              <FileUp /> Update JSON
             </Button>
           )}
           <Button variant="primary" asChild>
@@ -99,6 +100,7 @@ export default function DashboardPage() {
         </div>
       )}
       {!analysis && !loading && <EmptyState />}
+      {can("secretary") && <UpdateJsonDialog open={updating} onOpenChange={setUpdating} />}
 
       {analysis && current && (
         <>
@@ -175,14 +177,14 @@ export default function DashboardPage() {
 
           <div className="grid gap-4 lg:grid-cols-3">
             <Card className="flex flex-col items-center justify-center p-5">
-              <h3 className="self-start text-[15px] font-bold">Peak generator load</h3>
+              <h3 className="self-start text-[18px] font-bold">Peak generator load</h3>
               <div className="flex flex-1 items-center py-4">
                 <LoadGauge value={analysis.peakLoad} max={analysis.capacityKw ?? analysis.peakLoad} label="Peak vs capacity" />
               </div>
             </Card>
             <FuelCard analysis={analysis} />
             <Card className="p-5">
-              <h3 className="mb-4 text-[15px] font-bold">Value by shop</h3>
+              <h3 className="mb-4 text-[18px] font-bold">Value by shop</h3>
               <ValueSharePie analysis={analysis} />
             </Card>
           </div>

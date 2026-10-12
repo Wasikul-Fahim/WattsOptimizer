@@ -57,22 +57,22 @@ function Donut({
         </ResponsiveContainer>
         <div className="pointer-events-none absolute inset-0 grid place-items-center text-center">
           <div>
-            <div className="text-[26px] font-black leading-none tabular">{center}</div>
-            {centerSub && <div className="label-caps mt-1.5 !text-[10px]">{centerSub}</div>}
+            <div className="text-[31px] font-black leading-none tabular">{center}</div>
+            {centerSub && <div className="label-caps mt-1.5 !text-[12px]">{centerSub}</div>}
           </div>
         </div>
       </div>
       {legend && (
         <ul className="grid gap-1.5">
           {data.map((d) => (
-            <li key={d.name} className="flex items-center gap-2 text-[12.5px]">
+            <li key={d.name} className="flex items-center gap-2 text-[15px]">
               <span className="size-2.5 shrink-0 rounded-[3px]" style={{ background: d.color }} />
               <span className="min-w-0 flex-1 truncate text-muted-foreground">{d.name}</span>
               <span className="font-bold tabular">
                 {d.value}
                 {unit ? ` ${unit}` : ""}
               </span>
-              <span className="w-11 text-right font-mono text-[11px] text-muted-foreground tabular">{total ? pct(d.value / total) : "—"}</span>
+              <span className="w-11 text-right font-mono text-[13px] text-muted-foreground tabular">{total ? pct(d.value / total) : "—"}</span>
             </li>
           ))}
         </ul>

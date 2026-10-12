@@ -62,7 +62,7 @@ export function MetricCard({ icon: Icon, label, value, unit, description, trend,
         {trend && <TrendChip trend={trend} />}
       </div>
       <div className="label-caps mt-4">{label}</div>
-      <div className="mt-1.5 flex items-baseline gap-1.5 text-[32px] font-black leading-none tracking-[-0.01em] tabular">
+      <div className="mt-1.5 flex items-baseline gap-1.5 text-[38.5px] font-black leading-none tracking-[-0.01em] tabular">
         {value}
         {unit && <span className="text-sm font-normal tracking-normal text-muted-foreground">{unit}</span>}
       </div>
@@ -76,7 +76,7 @@ export function MetricCard({ icon: Icon, label, value, unit, description, trend,
           />
         </div>
       )}
-      {description && <div className="mt-2 text-[12.5px] text-muted-foreground">{description}</div>}
+      {description && <div className="mt-2 text-[15px] text-muted-foreground">{description}</div>}
     </motion.div>
   );
 }

@@ -26,7 +26,7 @@ export function StatusCard({ icon: Icon, label, value, detail, tone, live }: Sta
       </div>
       <div className="min-w-0">
         <div className="text-xs text-muted-foreground">{label}</div>
-        <div className="flex items-center gap-2 text-[16px] font-bold">
+        <div className="flex items-center gap-2 text-[19px] font-bold">
           <span className={cn("status-dot", TONE[tone], live && "live")} />
           <span className="truncate">{value}</span>
         </div>

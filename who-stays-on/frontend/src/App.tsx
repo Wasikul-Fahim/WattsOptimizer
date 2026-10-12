@@ -17,14 +17,13 @@ const InsightsPage = lazy(() => import("@/pages/InsightsPage"));
 const ReasonsPage = lazy(() => import("@/pages/ReasonsPage"));
 const UploadPage = lazy(() => import("@/pages/UploadPage"));
 const ReportPage = lazy(() => import("@/pages/ReportPage"));
-const ApiConsolePage = lazy(() => import("@/pages/ApiConsolePage"));
 const UsersPage = lazy(() => import("@/pages/UsersPage"));
 
 function Splash() {
   return (
     <div className="grid min-h-full place-items-center">
       <div className="flex flex-col items-center gap-5">
-        <LogoMark size={64} />
+        <LogoMark size={96} />
         <Spinner className="size-8" />
       </div>
     </div>
@@ -58,7 +57,6 @@ export default function App() {
                   <Route path="reasons" element={<ReasonsPage />} />
                   <Route path="upload" element={<RequireRole role="secretary"><UploadPage /></RequireRole>} />
                   <Route path="report" element={<ReportPage />} />
-                  <Route path="api" element={<ApiConsolePage />} />
                   <Route path="users" element={<RequireRole role="admin"><UsersPage /></RequireRole>} />
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Route>

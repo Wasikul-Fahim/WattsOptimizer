@@ -1,6 +1,6 @@
 # WattsOptimizer frontend
 
-React + TypeScript + Tailwind v4 + shadcn-style components + Framer Motion + Recharts + Lucide.
+React + TypeScript + Tailwind v4 + shadcn-style components (dialog uses native <dialog>) + Framer Motion + Recharts + Lucide.
 It is a pure client of the FastAPI backend in `..` — every roster decision comes from `POST /api/roster`.
 
 ## Run
@@ -28,20 +28,21 @@ src/
   lib/reasons.ts         parses the backend's reason strings into numbers for the reason cards
   components/
     ui/                  Button, Card, Badge, Input, Tabs, Dialog, Tooltip
+    upload/              JsonDropzone, InputSummary, UpdateJsonDialog (dashboard shortcut)
     layout/              Sidebar, Navbar, ThemeToggle, AppLayout
     common/              Modal, Toaster, Loader, PageHeader, EmptyState, Logo
     dashboard/           MetricCard, StatusCard, FuelCard, LoadGauge
     roster/              RosterTable, ShopRow, StatusCell
     charts/              FuelChart, LoadChart, ValueCharts, PieCharts
-  pages/                 Dashboard, Roster, Shops, Fuel, Insights, Reasons, Upload, Report, API console, Users, Login
+  pages/                 Dashboard, Roster, Shops, Fuel, Insights, Reasons, Upload, Report, Users, Login
 ```
 
 ## Roles
 
 | Role | Sees |
 |---|---|
-| committee | all read-only pages, API console |
-| secretary | + Upload JSON (publishes today's roster via `/api/roster/today`) |
+| committee | all read-only pages |
+| secretary | + Upload JSON page and the dashboard's Update JSON button (publish via `/api/roster/today`) |
 | admin (judges) | + Users |
 
 ## Notes

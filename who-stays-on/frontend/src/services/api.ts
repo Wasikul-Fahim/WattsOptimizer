@@ -57,30 +57,6 @@ export function postRoster(input: MarketInput | unknown): Promise<RosterResponse
   return request<RosterResponse>("/api/roster", { method: "POST", body: JSON.stringify(input) }, [400, 413]);
 }
 
-/** POST /api/roster with the raw text untouched, plus HTTP status and timing (API console). */
-export function postRosterRaw(body: string): Promise<{ httpStatus: number; body: unknown; ms: number }> {
-  const started = performance.now();
-  return fetch(`${BASE}/api/roster`, {
-    method: "POST",
-    credentials: "same-origin",
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
-    body,
-  })
-    .then(async (res) => {
-      const text = await res.text();
-      let parsed: unknown = text;
-      try {
-        parsed = JSON.parse(text);
-      } catch {
-        /* keep text */
-      }
-      return { httpStatus: res.status, body: parsed, ms: Math.round(performance.now() - started) };
-    })
-    .catch(() => {
-      throw new ApiError(0, "Cannot reach the server. Is the backend running on port 8000?");
-    });
-}
-
 /** POST /api/roster/today — secretary: compute and publish today's roster. */
 export function publishTodayRoster(input: MarketInput | unknown): Promise<RosterResponse> {
   return request<RosterResponse>("/api/roster/today", { method: "POST", body: JSON.stringify(input) }, [400, 413]);
@@ -121,7 +97,6 @@ export function deleteUser(username: string): Promise<{ ok: boolean }> {
 
 export const api = {
   postRoster,
-  postRosterRaw,
   publishTodayRoster,
   getToday,
   login,

@@ -21,7 +21,7 @@ export function LoadChart({ analysis, height = 260 }: { analysis: Analysis; heig
             </defs>
             <CartesianGrid vertical={false} />
             <XAxis dataKey="time" tickLine={false} axisLine={false} />
-            <YAxis tickLine={false} axisLine={false} unit=" kW" width={58} domain={[0, Math.ceil((cap ?? analysis.peakLoad) * 1.1)]} />
+            <YAxis tickLine={false} axisLine={false} unit=" kW" width={66} domain={[0, Math.ceil((cap ?? analysis.peakLoad) * 1.1)]} />
             <Tooltip cursor={{ stroke: c.blue, strokeDasharray: "3 3" }} content={<ChartTooltip unit="kW" />} />
             {cap && <ReferenceLine y={cap} stroke={c.danger} strokeWidth={1.5} />}
             <Area dataKey="load" name="Load" type="monotone" stroke={c.teal} strokeWidth={2} fill="url(#load-fill)" dot={{ r: 4, fill: c.teal, stroke: c.surface, strokeWidth: 2 }} activeDot={{ r: 6 }} />
@@ -45,7 +45,7 @@ export function UtilizationChart({ analysis, height = 240 }: { analysis: Analysi
         <BarChart data={data} margin={{ top: 8, right: 18, bottom: 0, left: -12 }}>
           <CartesianGrid vertical={false} />
           <XAxis dataKey="time" tickLine={false} axisLine={false} />
-          <YAxis tickLine={false} axisLine={false} unit="%" domain={[0, 100]} width={48} />
+          <YAxis tickLine={false} axisLine={false} unit="%" domain={[0, 100]} width={54} />
           <Tooltip cursor={{ fill: c.cursor }} content={<ChartTooltip unit="%" />} />
           <Bar dataKey="util" name="Capacity used" radius={[4, 4, 0, 0]} maxBarSize={34} background={{ fill: c.track, radius: 4 }}>
             {data.map((d) => (

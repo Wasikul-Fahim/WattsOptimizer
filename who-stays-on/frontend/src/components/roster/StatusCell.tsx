@@ -14,7 +14,7 @@ export function StatusCell({ cell, shopId, compact, onSelect }: { cell: Cell; sh
       disabled={cell.state === "grid"}
       aria-label={`${shopName(shopId)} ${cell.time}: ${LABEL[cell.state]}`}
       className={cn(
-        "flex h-10 w-full items-center justify-center gap-1 rounded-lg border font-mono text-[9.5px] font-bold tracking-[0.1em] transition-transform duration-150 enabled:cursor-pointer enabled:hover:scale-[1.04] print:h-[22px]",
+        "flex h-10 w-full items-center justify-center gap-1 rounded-lg border font-mono text-[11.5px] font-bold tracking-[0.1em] transition-transform duration-150 enabled:cursor-pointer enabled:hover:scale-[1.04] print:h-[22px]",
         cell.state === "on" && "cell-on",
         cell.state === "off" && "cell-off",
         cell.state === "grid" && "cell-grid",

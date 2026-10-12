@@ -9,7 +9,7 @@ export function ConflictBanner({ result }: { result: RosterResult }) {
       <div className="min-w-0 text-sm">
         <div className="font-bold">No roster meets every rule (rule {result.conflict.rule})</div>
         <p className="mt-0.5 text-muted-foreground">{result.conflict.message}</p>
-        <p className="mt-1.5 font-mono text-[11.5px] text-danger-ink">Showing best effort: {result.best_effort_note}</p>
+        <p className="mt-1.5 font-mono text-[14px] text-danger-ink">Showing best effort: {result.best_effort_note}</p>
       </div>
     </div>
   );

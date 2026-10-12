@@ -49,13 +49,13 @@ export function ChartTooltip({
   if (!active || !payload?.length) return null;
   return (
     <div className="min-w-[140px] rounded-xl border border-border bg-card px-3 py-2.5 shadow-card">
-      {label !== undefined && label !== "" && <div className="mb-1.5 font-mono text-[11px] font-bold text-muted-foreground">{label}</div>}
+      {label !== undefined && label !== "" && <div className="mb-1.5 font-mono text-[13px] font-bold text-muted-foreground">{label}</div>}
       <div className="grid gap-1">
         {payload.map((p, i) => {
           const v = typeof p.value === "number" ? p.value : Number(p.value);
           const color = p.color ?? p.payload?.fill;
           return (
-            <div key={i} className="flex items-center gap-2 text-[12.5px]">
+            <div key={i} className="flex items-center gap-2 text-[15px]">
               <span className="size-2.5 shrink-0 rounded-[3px]" style={{ background: color }} />
               <span className="text-muted-foreground">{String(p.name ?? "")}</span>
               <span className="ml-auto pl-3 font-bold tabular">
@@ -71,7 +71,7 @@ export function ChartTooltip({
 
 export function ChartLegend({ items }: { items: { label: string; color: string; dashed?: boolean }[] }) {
   return (
-    <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-[12px] text-muted-foreground">
+    <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-[14.5px] text-muted-foreground">
       {items.map((i) => (
         <span key={i.label} className="inline-flex items-center gap-1.5">
           {i.dashed ? (

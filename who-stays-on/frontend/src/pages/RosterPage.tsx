@@ -48,7 +48,7 @@ export default function RosterPage() {
             <RosterLegend />
           </div>
           <RosterTable analysis={analysis} filter={filter} onSelect={(shopId, hour) => setSelected({ shopId, hour })} />
-          <p className="text-[12.5px] text-muted-foreground">Hover or click a dark cell to see why.</p>
+          <p className="text-[15px] text-muted-foreground">Hover or click a dark cell to see why.</p>
           <Card>
             <CardHeader>
               <CardTitle>Shops powered each hour</CardTitle>

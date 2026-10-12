@@ -1,4 +1,4 @@
-import { BarChart3, FileUp, Fuel, LayoutDashboard, MessageSquareWarning, Printer, Store, Table2, Terminal, Users } from "lucide-react";
+import { BarChart3, FileUp, Fuel, LayoutDashboard, MessageSquareWarning, Printer, Store, Table2, Users } from "lucide-react";
 import type { Role } from "@/types/api";
 
 export const NAV: { to: string; label: string; icon: typeof LayoutDashboard; role: Role; group: "Monitor" | "Operate" | "Admin" }[] = [
@@ -10,6 +10,5 @@ export const NAV: { to: string; label: string; icon: typeof LayoutDashboard; rol
   { to: "/reasons", label: "Power-cut Reasons", icon: MessageSquareWarning, role: "committee", group: "Monitor" },
   { to: "/upload", label: "Upload JSON", icon: FileUp, role: "secretary", group: "Operate" },
   { to: "/report", label: "Export & Print", icon: Printer, role: "committee", group: "Operate" },
-  { to: "/api", label: "API Console", icon: Terminal, role: "committee", group: "Operate" },
   { to: "/users", label: "Users", icon: Users, role: "admin", group: "Admin" },
 ];

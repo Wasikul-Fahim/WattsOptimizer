@@ -11,15 +11,15 @@ export function Sidebar() {
   const groups = [...new Set(items.map((i) => i.group))];
 
   return (
-    <aside className="no-print sticky top-0 flex h-screen w-[248px] shrink-0 flex-col border-r border-border bg-surface max-lg:w-[72px]">
-      <div className="flex items-center gap-3 px-4 py-4 max-lg:justify-center max-lg:px-2">
-        <LogoMark size={34} />
+    <aside className="no-print sticky top-0 flex h-screen w-[292px] shrink-0 flex-col border-r border-border bg-surface max-lg:w-[80px]">
+      <div className="flex items-center gap-2 px-3 py-3 max-lg:justify-center max-lg:px-1">
+        <LogoMark size={51} />
         <Wordmark className="max-lg:hidden" />
       </div>
       <nav className="flex-1 overflow-y-auto px-3 pb-4 max-lg:px-2">
         {groups.map((g) => (
           <div key={g} className="mt-4">
-            <div className="label-caps px-3 pb-2 !text-[10px] max-lg:hidden">{g}</div>
+            <div className="label-caps px-3 pb-2 !text-[12px] max-lg:hidden">{g}</div>
             <ul className="grid gap-0.5">
               {items
                 .filter((i) => i.group === g)
@@ -31,7 +31,7 @@ export function Sidebar() {
                       title={label}
                       className={({ isActive }) =>
                         cn(
-                          "group relative flex items-center gap-3 rounded-[10px] px-3 py-2.5 text-[14px] font-bold text-muted-foreground transition-colors hover:bg-sunken hover:text-foreground max-lg:justify-center max-lg:px-0",
+                          "group relative flex items-center gap-3 rounded-[10px] px-3 py-2.5 text-[17px] font-bold text-muted-foreground transition-colors hover:bg-sunken hover:text-foreground max-lg:justify-center max-lg:px-0",
                           isActive && "bg-blue/10 text-foreground",
                         )
                       }

@@ -30,8 +30,8 @@ export function Toaster() {
             >
               <Icon className="ic mt-0.5 size-[18px] shrink-0" />
               <div className="min-w-0 flex-1">
-                <div className="text-[13.5px] font-bold">{t.title}</div>
-                {t.description && <div className="mt-0.5 break-words text-[12.5px] text-muted-foreground">{t.description}</div>}
+                <div className="text-[16px] font-bold">{t.title}</div>
+                {t.description && <div className="mt-0.5 break-words text-[15px] text-muted-foreground">{t.description}</div>}
               </div>
               <button className="cursor-pointer rounded p-0.5 text-muted-foreground hover:text-foreground" onClick={() => dismiss(t.id)} aria-label="Dismiss">
                 <X className="size-4" />

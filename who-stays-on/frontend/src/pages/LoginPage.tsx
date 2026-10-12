@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { LockKeyhole, LogIn } from "lucide-react";
 import { useState, type FormEvent } from "react";
-import logo from "@/assets/logo.png";
+import { LogoMark } from "@/components/common/Logo";
 import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
@@ -35,10 +35,8 @@ export default function LoginPage() {
       </div>
       <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="relative w-full max-w-[400px]">
         <div className="flex flex-col items-center text-center">
-          <div className="rounded-2xl border border-border bg-white px-4 py-2 shadow-card">
-            <img src={logo} alt="WattsOptimizer" className="h-24 w-auto" draggable={false} />
-          </div>
-          <h1 className="mt-6 font-display text-[22px] font-extrabold tracking-[0.12em]">WATTSOPTIMIZER</h1>
+          <LogoMark size={144} />
+          <h1 className="mt-6 font-display text-[26.5px] font-extrabold tracking-[0.12em]">WATTSOPTIMIZER</h1>
           <p className="mt-1 text-sm text-muted-foreground">Smart Energy Allocation System</p>
         </div>
         <form onSubmit={submit} className="mt-8 grid gap-4 rounded-2xl border border-border bg-surface p-6 shadow-card">
@@ -50,7 +48,7 @@ export default function LoginPage() {
             <Label htmlFor="password">Password</Label>
             <Input id="password" type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required />
           </div>
-          {error && <p className="rounded-lg bg-danger/10 px-3 py-2 text-[13px] text-danger-ink">{error}</p>}
+          {error && <p className="rounded-lg bg-danger/10 px-3 py-2 text-[15.5px] text-danger-ink">{error}</p>}
           <Button type="submit" variant="primary" size="lg" loading={busy}>
             {!busy && <LogIn />} Sign in
           </Button>

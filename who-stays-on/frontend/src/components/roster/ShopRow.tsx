@@ -8,7 +8,7 @@ export function ShopRow({ shop, onSelect }: { shop: ShopView; onSelect?: (shopId
   return (
     <tr>
       <td className="sticky left-0 z-10 bg-card py-1 pl-3 pr-3 print:py-0">
-        <div className="flex items-center gap-2 whitespace-nowrap text-[13.5px] font-bold print:text-[10.5px]">
+        <div className="flex items-center gap-2 whitespace-nowrap text-[16px] font-bold print:text-[10.5px]">
           {shopName(shop.id)}
           {shop.type === "mandatory" && (
             <Badge variant="mandatory" className="print:h-4 print:text-[8px]">
@@ -16,7 +16,7 @@ export function ShopRow({ shop, onSelect }: { shop: ShopView; onSelect?: (shopId
             </Badge>
           )}
         </div>
-        <div className="font-mono text-[11px] text-muted-foreground print:hidden">
+        <div className="font-mono text-[13px] text-muted-foreground print:hidden">
           {shop.kw} kW · {shop.darkHours} dark
         </div>
       </td>
